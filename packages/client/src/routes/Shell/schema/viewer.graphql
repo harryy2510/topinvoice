@@ -1,0 +1,19 @@
+query viewer {
+    viewer {
+        id
+        firstName
+        lastName
+        profileImage
+        company {
+            name
+            taxName
+            taxRate
+            streetAddress
+            city
+            state
+            country
+            postalCode
+            website
+        }
+    }
+}

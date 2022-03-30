@@ -1,0 +1,5 @@
+mutation createClient($input: CreateOneCompanyInput!) {
+    createOneCompany(input: $input) {
+        id
+    }
+}

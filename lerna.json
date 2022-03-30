@@ -1,0 +1,14 @@
+{
+    "packages": ["packages/*"],
+    "version": "independent",
+    "npmClient": "yarn",
+    "useWorkspaces": true,
+    "changelogPreset": "cz-conventional-changelog",
+    "command": {
+        "version": {
+            "message": "chore: release",
+            "conventionalCommits": true,
+            "yes": true
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "collection": "@nestjs/nestjs-schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@nestjs/graphql",
+        "options": {
+          "typeFileNameSuffix": [".dto.ts", ".entity.ts", ".args.ts", ".input.ts"],
+          "introspectComments": true
+        }
+      }
+    ],
+    "assets": ["templates/**/*"]
+  },
+  "generateOptions": {
+    "spec": false
+  }
+}

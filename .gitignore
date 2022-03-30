@@ -1,0 +1,11 @@
+.idea
+.vscode
+node_modules
+.jest-*
+*.log*
+.DS_Store
+build
+.env
+.eslintcache
+npm-debug.*
+tsconfig.tsbuildinfo

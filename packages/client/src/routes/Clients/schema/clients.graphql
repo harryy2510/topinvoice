@@ -1,0 +1,20 @@
+query clients($filter: CompanyFilter, $paging: OffsetPaging, $sorting: [CompanySort!]) {
+    viewer {
+        clients(filter: $filter, paging: $paging, sorting: $sorting) {
+            nodes {
+                id
+                name
+                taxRate
+                taxName
+                state
+                city
+                country
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}

@@ -1,0 +1,26 @@
+overwrite: true
+schema: "../server/schema.graphql"
+documents: "./src/**/*.graphql"
+generates:
+  src/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      exposeQueryKeys: true
+      exposeMutationKeys: true
+      addInfiniteQuery: true
+      errorType: "Error"
+      fetcher: '../axios/fetcher#axiosFetcher'
+      scalars:
+        ConnectionCursor: string
+        CountryCode: string
+        Currency: string
+        DateTime: string
+        EmailAddress: string
+        JSON: string
+        Password: string
+        PhoneNumber: string
+        PostalCode: string
+        URL: string

@@ -1,0 +1,27 @@
+query invoices($filter: InvoiceFilter, $paging: OffsetPaging, $sorting: [InvoiceSort!]) {
+    viewer {
+        invoices(filter: $filter, paging: $paging, sorting: $sorting) {
+            nodes {
+                id
+                invoiceNumber
+                invoiceDate
+                dueDate
+                paidDate
+                status
+                ...invoiceItems
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+
+fragment invoiceItems on Invoice {
+    items {
+        id
+    }
+}

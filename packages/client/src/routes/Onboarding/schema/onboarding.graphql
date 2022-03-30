@@ -1,0 +1,5 @@
+mutation onboarding($input: UpdateOneUserInput!) {
+    updateOneUser(input: $input) {
+        id
+    }
+}
