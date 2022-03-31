@@ -6,7 +6,10 @@ import { useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
 import { CreateInvoice as ICreateInvoice, useInvoicesQuery, useCreateInvoiceMutation } from '../../graphql/generated'
 import withDialog from '../../hoc/withDialog'
-import InvoiceForm, { CreateInvoiceDefaultValues, CreateInvoiceValidationSchema } from './components/InvoiceForm'
+import InvoiceCreateForm, {
+  CreateInvoiceDefaultValues,
+  CreateInvoiceValidationSchema
+} from './components/InvoiceCreateForm'
 
 export type CreateInvoiceProps = DialogProps & {}
 
@@ -28,7 +31,7 @@ const CreateInvoice: FC<CreateInvoiceProps> = ({ onClose }) => {
   return (
     <>
       <DialogContent>
-        <InvoiceForm id={formId} methods={methods} onSuccess={handleSubmit} />
+        <InvoiceCreateForm id={formId} methods={methods} onSuccess={handleSubmit} />
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'flex-end' }}>
         <Button onClick={handleClose} variant="text">

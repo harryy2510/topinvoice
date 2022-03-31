@@ -1,27 +1,24 @@
 import { FC } from 'react'
 import * as yup from 'yup'
+import moment from 'moment'
 import Form, { FormProps } from '../../../components/forms/Form'
 import { CreateInvoice, InvoiceStatusEnum } from '../../../graphql/generated'
 
 export const CreateInvoiceValidationSchema = yup
   .object({
-    invoiceNumber: yup.string().required('Required'),
     invoiceDate: yup.number().required('Required'),
-    companyId: yup.string().required('Required'),
-    dueDate: yup.string(),
-    status: yup.string().required('Required')
+    companyId: yup.string().required('Required')
   })
   .required()
 
 export const CreateInvoiceDefaultValues: CreateInvoice = {
   invoiceNumber: '',
-  invoiceDate: '',
   companyId: '',
   dueDate: '',
   status: InvoiceStatusEnum.Draft
 }
 
-const InvoiceForm: FC<FormProps<CreateInvoice>> = ({ methods, ...props }) => (
+const InvoiceCreateForm: FC<FormProps<CreateInvoice>> = ({ methods, ...props }) => (
   <Form<CreateInvoice> methods={methods} {...props}>
     {/*<FormInput sx={{ mb: 3 }} name="name" label="Invoice Name" />*/} {/*<Grid mb={3} container columnSpacing={2}>*/}{' '}
     {/*  <Grid item xs={12} sm={6}>*/}{' '}
@@ -39,4 +36,4 @@ const InvoiceForm: FC<FormProps<CreateInvoice>> = ({ methods, ...props }) => (
   </Form>
 )
 
-export default InvoiceForm
+export default InvoiceCreateForm
