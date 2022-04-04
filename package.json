@@ -7,6 +7,8 @@
     "codegen": "lerna --scope topinvoice-client exec -- yarn codegen",
     "start": "lerna run --parallel start",
     "build": "lerna run --parallel build",
+    "build:client": "lerna --scope topinvoice-client exec -- yarn build",
+    "build:server": "lerna --scope topinvoice-server exec -- yarn build",
     "database": "docker-compose up",
     "commit": "commit",
     "release": "lerna version"
