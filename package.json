@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "lerna run --parallel dev",
+    "codegen": "lerna --scope topinvoice-client exec -- yarn codegen",
     "start": "lerna run --parallel start",
     "build": "lerna run --parallel build",
     "database": "docker-compose up",
