@@ -8,7 +8,7 @@ import { CreateCompany, useClientsQuery, useCreateClientMutation } from '../../g
 import withDialog from '../../hoc/withDialog'
 import CompanyForm, { CreateCompanyDefaultValues, CreateCompanyValidationSchema } from './components/CompanyForm'
 
-export type CreateClientProps = DialogProps & {}
+export type CreateClientProps = DialogProps
 
 const formId = 'create-client-form'
 

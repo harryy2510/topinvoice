@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { IsBoolean, IsDate, IsEnum, IsNotEmpty, IsObject, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsDateString, IsEnum, IsNotEmpty, IsObject, IsOptional, IsString, Length } from 'class-validator'
 import { JSONScalar } from 'src/common/scalars'
 import { DEFAULT_ID_LENGTH } from 'src/common/utils/default-id'
 import { DataCodeEnum } from 'src/data-code/enums/data-code.enum'
@@ -30,6 +30,6 @@ export class CreateDataCodeDTO {
   expired?: boolean
 
   @IsOptional()
-  @IsDate()
-  expireAt?: Date
+  @IsDateString()
+  expireAt?: string
 }

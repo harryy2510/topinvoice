@@ -52,7 +52,7 @@ export class AuthResolver {
       if (user) {
         const dataCode = await this.dataCodeService.createOne({
           type: DataCodeEnum.ForgotPassword,
-          expireAt: moment().add(1, 'd').toDate(),
+          expireAt: moment().add(1, 'd').toISOString(),
           parent: user.email
         })
         await this.emailsService.send({

@@ -1,0 +1,30 @@
+query invoiceDetails($id: ID!) {
+    invoice(id: $id) {
+        id
+        invoiceNumber
+        invoiceDate
+        dueDate
+        paidDate
+        status
+        company {
+            name
+            streetAddress
+            city
+            state
+            country
+            postalCode
+            contactName
+            contactEmail
+        }
+        items {
+            id
+            name
+            description
+            discount
+            price
+            quantity
+            unit
+        }
+    }
+}
+

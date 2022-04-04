@@ -26,6 +26,7 @@ import { InvoiceItemsModule } from './invoice-items/invoice-items.module'
 import { InvoicesModule } from './invoices/invoices.module'
 
 import { UsersModule } from './users/users.module'
+import { SeederModule } from './seeder/seeder.module'
 
 @Module({
   imports: [
@@ -116,7 +117,8 @@ import { UsersModule } from './users/users.module'
     InvoiceItemsModule,
     DataCodeModule,
     EmailsModule,
-    AuthModule
+    AuthModule,
+    SeederModule
   ],
   providers: [
     ...scalars,

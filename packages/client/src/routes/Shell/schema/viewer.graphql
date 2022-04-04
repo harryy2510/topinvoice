@@ -3,17 +3,21 @@ query viewer {
         id
         firstName
         lastName
+        email
         profileImage
         company {
             name
             taxName
             taxRate
+            taxNumber
             streetAddress
             city
             state
             country
             postalCode
             website
+            contactName
+            contactEmail
         }
     }
 }

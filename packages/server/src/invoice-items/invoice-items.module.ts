@@ -17,6 +17,7 @@ import { InvoiceItemsService } from './invoice-items.service'
           EntityClass: InvoiceItemEntity,
           CreateDTOClass: CreateInvoiceItemDTO,
           UpdateDTOClass: UpdateInvoiceItemDTO,
+          ServiceClass: InvoiceItemsService,
           read: { disabled: true }
         }
       ]

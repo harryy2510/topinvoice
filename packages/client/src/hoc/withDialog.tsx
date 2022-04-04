@@ -27,8 +27,7 @@ const withDialog =
             <CloseOutlined />
           </IconButton>
         )}
-        {title && <DialogTitle id={labelledByRef.current}>{title}</DialogTitle>}
-        <Component {...(props as P)} />
+        {title && <DialogTitle id={labelledByRef.current}>{title}</DialogTitle>} <Component {...(props as P)} />
       </Dialog>
     )
   }

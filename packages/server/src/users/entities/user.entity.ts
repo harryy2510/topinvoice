@@ -22,6 +22,9 @@ export class UserCompanyEntity extends PickType(CompanyEntity, [
   'name',
   'taxRate',
   'taxName',
+  'taxNumber',
+  'contactName',
+  'contactEmail',
   'streetAddress',
   'city',
   'state',
@@ -87,13 +90,16 @@ export class UserEntity {
   @Column({ nullable: true })
   provider?: string
 
+  @Column('integer', { default: 1 })
+  nextInvoiceNumber: number = 1
+
   @CreateDateColumn()
   @Field(() => GraphQLISODateTime)
-  createdAt: Date
+  createdAt: string
 
   @UpdateDateColumn()
   @Field(() => GraphQLISODateTime)
-  updatedAt: Date
+  updatedAt: string
 
   // relations
   @OneToMany(() => CompanyEntity, (company) => company.user)

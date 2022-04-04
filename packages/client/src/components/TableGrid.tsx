@@ -12,12 +12,15 @@ const TableGrid: ForwardRefExoticComponent<DataGridProps & RefAttributes<HTMLDiv
         />
       )}
       <DataGrid
-        sx={{
-          border: 'none',
-          '.MuiDataGrid-columnSeparator': { display: 'none' },
-          '.MuiDataGrid-virtualScroller': { ...(loading ? { opacity: 0.5 } : {}) },
-          '.MuiDataGrid-cell, .MuiDataGrid-columnHeader': { outline: 'none!important' }
-        }}
+        sx={[
+          {
+            border: 'none',
+            '.MuiDataGrid-columnSeparator': { display: 'none' },
+            '.MuiDataGrid-row': { ...(props.onRowClick ? { cursor: 'pointer' } : {}) },
+            '.MuiDataGrid-virtualScroller': { ...(loading ? { opacity: 0.5 } : {}) },
+            '.MuiDataGrid-cell, .MuiDataGrid-columnHeader': { outline: 'none!important' }
+          }
+        ]}
         initialState={{
           pagination: {
             pageSize: 10

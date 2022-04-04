@@ -51,11 +51,11 @@ export class InvoiceItemEntity {
 
   @CreateDateColumn()
   @Field(() => GraphQLISODateTime)
-  createdAt: Date
+  createdAt: string
 
   @UpdateDateColumn()
   @Field(() => GraphQLISODateTime)
-  updatedAt: Date
+  updatedAt: string
 
   // relations
   @ManyToOne(() => UserEntity, (user) => user.invoices, {

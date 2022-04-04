@@ -8,17 +8,26 @@ export type MainLayoutProps = {
   ContainerProps?: ContainerProps
   title?: ReactNode
   onAddClick?: (event: MouseEvent<HTMLButtonElement>) => void
+  actions?: ReactNode
 }
 
-const MainLayout: FC<MainLayoutProps> = ({ title, onAddClick, ContainerProps, children }) => (
+const MainLayout: FC<MainLayoutProps> = ({ actions, title, onAddClick, ContainerProps, children }) => (
   <Container
+    className="main-layout"
     {...ContainerProps}
     sx={[{ py: { xs: 4, md: 8 }, position: 'relative', minHeight: '100%' }, ...coerceArray(ContainerProps?.sx)]}
   >
     {(title || onAddClick) && (
       <Flex mb={2} alignItems="center" justifyContent="space-between">
-        <div>{title && <Typography variant="h5">{title}</Typography>}</div>
         <div>
+          {title && (
+            <Typography lineHeight="42px" variant="h6">
+              {title}
+            </Typography>
+          )}
+        </div>
+        <div>
+          {actions}
           {onAddClick && (
             <IconButton sx={{ borderColor: 'divider', borderWidth: 1, borderStyle: 'solid' }} onClick={onAddClick}>
               <AddOutlined />

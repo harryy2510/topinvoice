@@ -1,5 +1,5 @@
 {
-  "collection": "@nestjs/nestjs-schematics",
+  "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
     "plugins": [

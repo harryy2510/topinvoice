@@ -1,0 +1,5 @@
+mutation createInvoiceItems($input: CreateManyInvoiceItemsInput!) {
+    createManyInvoiceItems(input: $input) {
+        id
+    }
+}

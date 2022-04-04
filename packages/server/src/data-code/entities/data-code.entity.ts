@@ -32,13 +32,13 @@ export class DataCodeEntity {
 
   @Column({ type: 'timestamp', nullable: true })
   @Field(() => GraphQLISODateTime)
-  expireAt?: Date
+  expireAt?: string
 
   @CreateDateColumn()
   @Field(() => GraphQLISODateTime)
-  createdAt: Date
+  createdAt: string
 
   @UpdateDateColumn()
   @Field(() => GraphQLISODateTime)
-  updatedAt: Date
+  updatedAt: string
 }

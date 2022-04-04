@@ -1,0 +1,18 @@
+query clientDetails($id: ID!) {
+    company(id: $id) {
+        id
+        name
+        taxRate
+        taxName
+        taxNumber
+        state
+        city
+        country
+        streetAddress
+        postalCode
+        website
+        contactName
+        contactEmail
+    }
+}
+

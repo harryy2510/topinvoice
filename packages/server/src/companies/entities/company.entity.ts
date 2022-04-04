@@ -1,3 +1,4 @@
+import { SortDirection } from '@nestjs-query/core'
 import {
   Authorize,
   BeforeCreateMany,
@@ -9,7 +10,7 @@ import {
   QueryOptions,
   Relation
 } from '@nestjs-query/query-graphql'
-import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
+import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
 import ownerAuthorizer from 'src/common/authorizers/owner.authorizer'
 import { CreatedByManyHook } from 'src/common/hooks/CreatedByMany'
 import { CreatedByOneHook } from 'src/common/hooks/CreatedByOne'
@@ -40,7 +41,11 @@ import {
   nullable: true,
   enableTotalCount: true
 })
-@QueryOptions({ pagingStrategy: PagingStrategies.OFFSET, enableTotalCount: true })
+@QueryOptions({
+  pagingStrategy: PagingStrategies.OFFSET,
+  enableTotalCount: true,
+  defaultSort: [{ direction: SortDirection.DESC, field: 'createdAt' }]
+})
 export class CompanyEntity {
   @PrimaryColumn('varchar', { length: DEFAULT_ID_LENGTH, unique: true })
   @IDField(() => ID)
@@ -50,13 +55,28 @@ export class CompanyEntity {
   @FilterableField()
   name: string
 
+  @Column()
+  @FilterableField()
+  contactName: string
+
+  @Column()
+  @FilterableField()
+  contactEmail: string
+
   @Column('float')
+  @FilterableField()
   taxRate: number
 
   @Column({ nullable: true, default: 'VAT' })
+  @FilterableField()
   taxName?: string
 
+  @Column()
+  @FilterableField()
+  taxNumber: string
+
   @Column({ nullable: true })
+  @FilterableField()
   streetAddress?: string
 
   @Column({ nullable: true })
@@ -76,15 +96,16 @@ export class CompanyEntity {
   postalCode: string
 
   @Column({ nullable: true })
+  @FilterableField()
   website?: string
 
   @CreateDateColumn()
-  @Field(() => GraphQLISODateTime)
-  createdAt: Date
+  @FilterableField(() => GraphQLISODateTime)
+  createdAt: string
 
   @UpdateDateColumn()
-  @Field(() => GraphQLISODateTime)
-  updatedAt: Date
+  @FilterableField(() => GraphQLISODateTime)
+  updatedAt: string
 
   // relations
   @ManyToOne(() => UserEntity, (user) => user.clients, {

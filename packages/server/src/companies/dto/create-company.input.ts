@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator'
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CountryCodeScalar, PostalCodeScalar } from 'src/common/scalars'
 
 @InputType('CreateCompany')
@@ -10,6 +10,17 @@ export class CreateCompanyDTO {
   name: string
 
   @IsNotEmpty()
+  @IsString()
+  @MaxLength(255)
+  contactName: string
+
+  @IsNotEmpty()
+  @IsString()
+  @IsEmail()
+  @MaxLength(255)
+  contactEmail: string
+
+  @IsNotEmpty()
   @IsNumber()
   taxRate: number
 
@@ -17,6 +28,11 @@ export class CreateCompanyDTO {
   @IsString()
   @MaxLength(255)
   taxName?: string
+
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(255)
+  taxNumber: string
 
   @IsOptional()
   @IsString()
@@ -49,9 +65,4 @@ export class CreateCompanyDTO {
   @IsString()
   @MaxLength(255)
   website?: string
-
-  @IsOptional()
-  @IsString()
-  @MaxLength(255)
-  currency?: string
 }

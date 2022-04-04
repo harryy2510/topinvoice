@@ -1,33 +1,48 @@
-import { InputType } from '@nestjs/graphql'
-import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
+import { Field, InputType } from '@nestjs/graphql'
+import { Type } from 'class-transformer'
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+  MaxLength,
+  ValidateNested
+} from 'class-validator'
 import { DEFAULT_ID_LENGTH } from 'src/common/utils/default-id'
 import { InvoiceStatusEnum } from '../enums/invoice-status.enum'
 
-@InputType('CreateInvoice')
-export class CreateInvoiceDTO {
+@InputType('CreateInvoiceCompany')
+export class CreateInvoiceCompanyDTO {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(20)
-  invoiceNumber: string
+  @MaxLength(DEFAULT_ID_LENGTH)
+  id: string
+}
 
+@InputType('CreateInvoice')
+export class CreateInvoiceDTO {
   @IsOptional()
   @IsEnum(InvoiceStatusEnum)
   status?: InvoiceStatusEnum
 
   @IsOptional()
-  @IsDate()
-  invoiceDate?: Date
+  @IsDateString()
+  invoiceDate?: string
 
   @IsOptional()
-  @IsDate()
-  dueDate?: Date
+  @IsDateString()
+  dueDate?: string
 
   @IsOptional()
-  @IsDate()
-  paidDate?: Date
+  @IsDateString()
+  paidDate?: string
 
   @IsNotEmpty()
-  @IsString()
-  @MaxLength(DEFAULT_ID_LENGTH)
-  companyId: string
+  @IsObject()
+  @Field(() => CreateInvoiceCompanyDTO)
+  @ValidateNested()
+  @Type(() => CreateInvoiceCompanyDTO)
+  company: CreateInvoiceCompanyDTO
 }

@@ -33,6 +33,8 @@ export type Scalars = {
 export type Company = {
   __typename?: 'Company';
   city?: Maybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
+  contactName: Scalars['String'];
   country: Scalars['CountryCode'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
@@ -43,6 +45,7 @@ export type Company = {
   state?: Maybe<Scalars['String']>;
   streetAddress?: Maybe<Scalars['String']>;
   taxName?: Maybe<Scalars['String']>;
+  taxNumber: Scalars['String'];
   taxRate: Scalars['Int'];
   updatedAt: Scalars['DateTime'];
   user: User;
@@ -64,30 +67,55 @@ export type CompanyInvoicesAggregateArgs = {
 export type CompanyAggregateFilter = {
   and?: InputMaybe<Array<CompanyAggregateFilter>>;
   city?: InputMaybe<StringFieldComparison>;
+  contactEmail?: InputMaybe<StringFieldComparison>;
+  contactName?: InputMaybe<StringFieldComparison>;
   country?: InputMaybe<CountryCodeAdaptedScalarFilterComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CompanyAggregateFilter>>;
   postalCode?: InputMaybe<PostalCodeAdaptedScalarFilterComparison>;
   state?: InputMaybe<StringFieldComparison>;
+  streetAddress?: InputMaybe<StringFieldComparison>;
+  taxName?: InputMaybe<StringFieldComparison>;
+  taxNumber?: InputMaybe<StringFieldComparison>;
+  taxRate?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  website?: InputMaybe<StringFieldComparison>;
 };
 
 export type CompanyAggregateGroupBy = {
   __typename?: 'CompanyAggregateGroupBy';
   city?: Maybe<Scalars['String']>;
+  contactEmail?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['CountryCode']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   postalCode?: Maybe<Scalars['PostalCode']>;
   state?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']>;
+  taxName?: Maybe<Scalars['String']>;
+  taxNumber?: Maybe<Scalars['String']>;
+  taxRate?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 export type CompanyAggregateResponse = {
   __typename?: 'CompanyAggregateResponse';
+  avg?: Maybe<CompanyAvgAggregate>;
   count?: Maybe<CompanyCountAggregate>;
   groupBy?: Maybe<CompanyAggregateGroupBy>;
   max?: Maybe<CompanyMaxAggregate>;
   min?: Maybe<CompanyMinAggregate>;
+  sum?: Maybe<CompanySumAggregate>;
+};
+
+export type CompanyAvgAggregate = {
+  __typename?: 'CompanyAvgAggregate';
+  taxRate?: Maybe<Scalars['Float']>;
 };
 
 export type CompanyConnection = {
@@ -103,27 +131,47 @@ export type CompanyConnection = {
 export type CompanyCountAggregate = {
   __typename?: 'CompanyCountAggregate';
   city?: Maybe<Scalars['Int']>;
+  contactEmail?: Maybe<Scalars['Int']>;
+  contactName?: Maybe<Scalars['Int']>;
   country?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['Int']>;
   postalCode?: Maybe<Scalars['Int']>;
   state?: Maybe<Scalars['Int']>;
+  streetAddress?: Maybe<Scalars['Int']>;
+  taxName?: Maybe<Scalars['Int']>;
+  taxNumber?: Maybe<Scalars['Int']>;
+  taxRate?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['Int']>;
+  website?: Maybe<Scalars['Int']>;
 };
 
 export type CompanyDeleteFilter = {
   and?: InputMaybe<Array<CompanyDeleteFilter>>;
   city?: InputMaybe<StringFieldComparison>;
+  contactEmail?: InputMaybe<StringFieldComparison>;
+  contactName?: InputMaybe<StringFieldComparison>;
   country?: InputMaybe<CountryCodeAdaptedScalarFilterComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CompanyDeleteFilter>>;
   postalCode?: InputMaybe<PostalCodeAdaptedScalarFilterComparison>;
   state?: InputMaybe<StringFieldComparison>;
+  streetAddress?: InputMaybe<StringFieldComparison>;
+  taxName?: InputMaybe<StringFieldComparison>;
+  taxNumber?: InputMaybe<StringFieldComparison>;
+  taxRate?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  website?: InputMaybe<StringFieldComparison>;
 };
 
 export type CompanyDeleteResponse = {
   __typename?: 'CompanyDeleteResponse';
   city?: Maybe<Scalars['String']>;
+  contactEmail?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['CountryCode']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
@@ -133,6 +181,7 @@ export type CompanyDeleteResponse = {
   state?: Maybe<Scalars['String']>;
   streetAddress?: Maybe<Scalars['String']>;
   taxName?: Maybe<Scalars['String']>;
+  taxNumber?: Maybe<Scalars['String']>;
   taxRate?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   user?: Maybe<User>;
@@ -142,27 +191,48 @@ export type CompanyDeleteResponse = {
 export type CompanyFilter = {
   and?: InputMaybe<Array<CompanyFilter>>;
   city?: InputMaybe<StringFieldComparison>;
+  contactEmail?: InputMaybe<StringFieldComparison>;
+  contactName?: InputMaybe<StringFieldComparison>;
   country?: InputMaybe<CountryCodeAdaptedScalarFilterComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CompanyFilter>>;
   postalCode?: InputMaybe<PostalCodeAdaptedScalarFilterComparison>;
   state?: InputMaybe<StringFieldComparison>;
+  streetAddress?: InputMaybe<StringFieldComparison>;
+  taxName?: InputMaybe<StringFieldComparison>;
+  taxNumber?: InputMaybe<StringFieldComparison>;
+  taxRate?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  website?: InputMaybe<StringFieldComparison>;
 };
 
 export type CompanyInvoicesAggregateGroupBy = {
   __typename?: 'CompanyInvoicesAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type CompanyInvoicesAggregateResponse = {
   __typename?: 'CompanyInvoicesAggregateResponse';
+  avg?: Maybe<CompanyInvoicesAvgAggregate>;
   count?: Maybe<CompanyInvoicesCountAggregate>;
   groupBy?: Maybe<CompanyInvoicesAggregateGroupBy>;
   max?: Maybe<CompanyInvoicesMaxAggregate>;
   min?: Maybe<CompanyInvoicesMinAggregate>;
+  sum?: Maybe<CompanyInvoicesSumAggregate>;
+};
+
+export type CompanyInvoicesAvgAggregate = {
+  __typename?: 'CompanyInvoicesAvgAggregate';
+  invoiceNumber?: Maybe<Scalars['Float']>;
 };
 
 export type CompanyInvoicesConnection = {
@@ -177,43 +247,81 @@ export type CompanyInvoicesConnection = {
 
 export type CompanyInvoicesCountAggregate = {
   __typename?: 'CompanyInvoicesCountAggregate';
+  createdAt?: Maybe<Scalars['Int']>;
+  dueDate?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  invoiceDate?: Maybe<Scalars['Int']>;
   invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['Int']>;
 };
 
 export type CompanyInvoicesMaxAggregate = {
   __typename?: 'CompanyInvoicesMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type CompanyInvoicesMinAggregate = {
   __typename?: 'CompanyInvoicesMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type CompanyInvoicesSumAggregate = {
+  __typename?: 'CompanyInvoicesSumAggregate';
+  invoiceNumber?: Maybe<Scalars['Float']>;
 };
 
 export type CompanyMaxAggregate = {
   __typename?: 'CompanyMaxAggregate';
   city?: Maybe<Scalars['String']>;
+  contactEmail?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['CountryCode']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   postalCode?: Maybe<Scalars['PostalCode']>;
   state?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']>;
+  taxName?: Maybe<Scalars['String']>;
+  taxNumber?: Maybe<Scalars['String']>;
+  taxRate?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 export type CompanyMinAggregate = {
   __typename?: 'CompanyMinAggregate';
   city?: Maybe<Scalars['String']>;
+  contactEmail?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['CountryCode']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   postalCode?: Maybe<Scalars['PostalCode']>;
   state?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']>;
+  taxName?: Maybe<Scalars['String']>;
+  taxNumber?: Maybe<Scalars['String']>;
+  taxRate?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 export type CompanySort = {
@@ -224,12 +332,26 @@ export type CompanySort = {
 
 export enum CompanySortFields {
   City = 'city',
+  ContactEmail = 'contactEmail',
+  ContactName = 'contactName',
   Country = 'country',
+  CreatedAt = 'createdAt',
   Id = 'id',
   Name = 'name',
   PostalCode = 'postalCode',
-  State = 'state'
+  State = 'state',
+  StreetAddress = 'streetAddress',
+  TaxName = 'taxName',
+  TaxNumber = 'taxNumber',
+  TaxRate = 'taxRate',
+  UpdatedAt = 'updatedAt',
+  Website = 'website'
 }
+
+export type CompanySumAggregate = {
+  __typename?: 'CompanySumAggregate';
+  taxRate?: Maybe<Scalars['Float']>;
+};
 
 export type CountryCodeAdaptedScalarFilterComparison = {
   eq?: InputMaybe<Scalars['CountryCode']>;
@@ -250,34 +372,43 @@ export type CountryCodeAdaptedScalarFilterComparison = {
 
 export type CreateCompany = {
   city?: InputMaybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
+  contactName: Scalars['String'];
   country: Scalars['CountryCode'];
-  currency?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   postalCode: Scalars['PostalCode'];
   state?: InputMaybe<Scalars['String']>;
   streetAddress?: InputMaybe<Scalars['String']>;
   taxName?: InputMaybe<Scalars['String']>;
+  taxNumber: Scalars['String'];
   taxRate: Scalars['Int'];
   website?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateInvoice = {
-  companyId: Scalars['String'];
-  dueDate?: InputMaybe<Scalars['DateTime']>;
-  invoiceDate?: InputMaybe<Scalars['DateTime']>;
-  invoiceNumber: Scalars['String'];
-  paidDate?: InputMaybe<Scalars['DateTime']>;
+  company: CreateInvoiceCompany;
+  dueDate?: InputMaybe<Scalars['String']>;
+  invoiceDate?: InputMaybe<Scalars['String']>;
+  paidDate?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<InvoiceStatusEnum>;
+};
+
+export type CreateInvoiceCompany = {
+  id: Scalars['String'];
 };
 
 export type CreateInvoiceItem = {
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['Int']>;
-  invoiceId: Scalars['String'];
+  invoice: CreateInvoiceItemInvoice;
   name: Scalars['String'];
   price: Scalars['Int'];
   quantity: Scalars['Int'];
   unit?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateInvoiceItemInvoice = {
+  id: Scalars['String'];
 };
 
 export type CreateManyInvoiceItemsInput = {
@@ -359,6 +490,26 @@ export type DataCodeMinAggregate = {
   parent?: Maybe<Scalars['String']>;
 };
 
+export type DateFieldComparison = {
+  between?: InputMaybe<DateFieldComparisonBetween>;
+  eq?: InputMaybe<Scalars['DateTime']>;
+  gt?: InputMaybe<Scalars['DateTime']>;
+  gte?: InputMaybe<Scalars['DateTime']>;
+  in?: InputMaybe<Array<Scalars['DateTime']>>;
+  is?: InputMaybe<Scalars['Boolean']>;
+  isNot?: InputMaybe<Scalars['Boolean']>;
+  lt?: InputMaybe<Scalars['DateTime']>;
+  lte?: InputMaybe<Scalars['DateTime']>;
+  neq?: InputMaybe<Scalars['DateTime']>;
+  notBetween?: InputMaybe<DateFieldComparisonBetween>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+};
+
+export type DateFieldComparisonBetween = {
+  lower: Scalars['DateTime'];
+  upper: Scalars['DateTime'];
+};
+
 export type DeleteManyCompaniesInput = {
   /** Filter to find records to delete */
   filter: CompanyDeleteFilter;
@@ -423,7 +574,7 @@ export type Invoice = {
   dueDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   invoiceDate: Scalars['DateTime'];
-  invoiceNumber: Scalars['String'];
+  invoiceNumber: Scalars['Int'];
   items?: Maybe<Array<InvoiceItem>>;
   paidDate?: Maybe<Scalars['DateTime']>;
   status: InvoiceStatusEnum;
@@ -439,17 +590,32 @@ export type InvoiceItemsArgs = {
 
 export type InvoiceAggregateFilter = {
   and?: InputMaybe<Array<InvoiceAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
-  invoiceNumber?: InputMaybe<StringFieldComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<InvoiceAggregateFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
   status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type InvoiceAggregateGroupBy = {
   __typename?: 'InvoiceAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type InvoiceAvgAggregate = {
+  __typename?: 'InvoiceAvgAggregate';
+  invoiceNumber?: Maybe<Scalars['Float']>;
 };
 
 export type InvoiceConnection = {
@@ -464,17 +630,27 @@ export type InvoiceConnection = {
 
 export type InvoiceCountAggregate = {
   __typename?: 'InvoiceCountAggregate';
+  createdAt?: Maybe<Scalars['Int']>;
+  dueDate?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  invoiceDate?: Maybe<Scalars['Int']>;
   invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['Int']>;
 };
 
 export type InvoiceDeleteFilter = {
   and?: InputMaybe<Array<InvoiceDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
-  invoiceNumber?: InputMaybe<StringFieldComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<InvoiceDeleteFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
   status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type InvoiceDeleteResponse = {
@@ -484,7 +660,7 @@ export type InvoiceDeleteResponse = {
   dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
   invoiceDate?: Maybe<Scalars['DateTime']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
   items?: Maybe<Array<InvoiceItem>>;
   paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
@@ -494,10 +670,36 @@ export type InvoiceDeleteResponse = {
 
 export type InvoiceFilter = {
   and?: InputMaybe<Array<InvoiceFilter>>;
+  company?: InputMaybe<InvoiceFilterCompanyFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
-  invoiceNumber?: InputMaybe<StringFieldComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<InvoiceFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
   status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type InvoiceFilterCompanyFilter = {
+  and?: InputMaybe<Array<InvoiceFilterCompanyFilter>>;
+  city?: InputMaybe<StringFieldComparison>;
+  contactEmail?: InputMaybe<StringFieldComparison>;
+  contactName?: InputMaybe<StringFieldComparison>;
+  country?: InputMaybe<CountryCodeAdaptedScalarFilterComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<InvoiceFilterCompanyFilter>>;
+  postalCode?: InputMaybe<PostalCodeAdaptedScalarFilterComparison>;
+  state?: InputMaybe<StringFieldComparison>;
+  streetAddress?: InputMaybe<StringFieldComparison>;
+  taxName?: InputMaybe<StringFieldComparison>;
+  taxNumber?: InputMaybe<StringFieldComparison>;
+  taxRate?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  website?: InputMaybe<StringFieldComparison>;
 };
 
 export type InvoiceItem = {
@@ -588,16 +790,26 @@ export type InvoiceItemUpdateFilter = {
 
 export type InvoiceMaxAggregate = {
   __typename?: 'InvoiceMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type InvoiceMinAggregate = {
   __typename?: 'InvoiceMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
-  invoiceNumber?: Maybe<Scalars['String']>;
+  invoiceDate?: Maybe<Scalars['DateTime']>;
+  invoiceNumber?: Maybe<Scalars['Int']>;
+  paidDate?: Maybe<Scalars['DateTime']>;
   status?: Maybe<InvoiceStatusEnum>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type InvoiceSort = {
@@ -607,9 +819,14 @@ export type InvoiceSort = {
 };
 
 export enum InvoiceSortFields {
+  CreatedAt = 'createdAt',
+  DueDate = 'dueDate',
   Id = 'id',
+  InvoiceDate = 'invoiceDate',
   InvoiceNumber = 'invoiceNumber',
-  Status = 'status'
+  PaidDate = 'paidDate',
+  Status = 'status',
+  UpdatedAt = 'updatedAt'
 }
 
 export enum InvoiceStatusEnum {
@@ -635,12 +852,22 @@ export type InvoiceStatusEnumFilterComparison = {
   notLike?: InputMaybe<InvoiceStatusEnum>;
 };
 
+export type InvoiceSumAggregate = {
+  __typename?: 'InvoiceSumAggregate';
+  invoiceNumber?: Maybe<Scalars['Float']>;
+};
+
 export type InvoiceUpdateFilter = {
   and?: InputMaybe<Array<InvoiceUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
-  invoiceNumber?: InputMaybe<StringFieldComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<InvoiceUpdateFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
   status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type LoginInput = {
@@ -671,6 +898,8 @@ export type Mutation = {
   login: LoginResponse;
   register: LoginResponse;
   resetPassword: Scalars['Boolean'];
+  seedClients?: Maybe<Array<Company>>;
+  seedInvoices?: Maybe<Array<Invoice>>;
   setCompanyOnInvoice: Invoice;
   setUserOnInvoice: Invoice;
   updateManyInvoiceItems: UpdateManyResponse;
@@ -789,6 +1018,26 @@ export type MutationUpdateOneInvoiceItemArgs = {
 
 export type MutationUpdateOneUserArgs = {
   input: UpdateOneUserInput;
+};
+
+export type NumberFieldComparison = {
+  between?: InputMaybe<NumberFieldComparisonBetween>;
+  eq?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<Scalars['Int']>>;
+  is?: InputMaybe<Scalars['Boolean']>;
+  isNot?: InputMaybe<Scalars['Boolean']>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  neq?: InputMaybe<Scalars['Int']>;
+  notBetween?: InputMaybe<NumberFieldComparisonBetween>;
+  notIn?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+export type NumberFieldComparisonBetween = {
+  lower: Scalars['Int'];
+  upper: Scalars['Int'];
 };
 
 export type OffsetPageInfo = {
@@ -930,22 +1179,23 @@ export type StringFieldComparison = {
 
 export type UpdateCompany = {
   city?: InputMaybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
+  contactName: Scalars['String'];
   country: Scalars['CountryCode'];
-  currency?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   postalCode: Scalars['PostalCode'];
   state?: InputMaybe<Scalars['String']>;
   streetAddress?: InputMaybe<Scalars['String']>;
   taxName?: InputMaybe<Scalars['String']>;
+  taxNumber: Scalars['String'];
   taxRate: Scalars['Int'];
   website?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateInvoice = {
-  dueDate?: InputMaybe<Scalars['DateTime']>;
-  invoiceDate?: InputMaybe<Scalars['DateTime']>;
-  invoiceNumber: Scalars['String'];
-  paidDate?: InputMaybe<Scalars['DateTime']>;
+  dueDate?: InputMaybe<Scalars['String']>;
+  invoiceDate?: InputMaybe<Scalars['String']>;
+  paidDate?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<InvoiceStatusEnum>;
 };
 
@@ -1026,6 +1276,7 @@ export type User = {
   invoiceItems?: Maybe<UserInvoiceItemsConnection>;
   invoices?: Maybe<UserInvoicesConnection>;
   lastName?: Maybe<Scalars['String']>;
+  nextInvoiceNumber: Scalars['Int'];
   phone?: Maybe<Scalars['PhoneNumber']>;
   profileImage?: Maybe<Scalars['String']>;
   provider?: Maybe<Scalars['String']>;
@@ -1071,12 +1322,15 @@ export type UserClientsConnection = {
 export type UserCompany = {
   __typename?: 'UserCompany';
   city?: Maybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
+  contactName: Scalars['String'];
   country: Scalars['CountryCode'];
   name: Scalars['String'];
   postalCode: Scalars['PostalCode'];
   state?: Maybe<Scalars['String']>;
   streetAddress?: Maybe<Scalars['String']>;
   taxName?: Maybe<Scalars['String']>;
+  taxNumber: Scalars['String'];
   taxRate: Scalars['Int'];
   website?: Maybe<Scalars['String']>;
 };
@@ -1124,6 +1378,13 @@ export type UserMinAggregate = {
   id?: Maybe<Scalars['ID']>;
 };
 
+export type ClientDetailsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ClientDetailsQuery = { __typename?: 'Query', company?: { __typename?: 'Company', id: string, name: string, taxRate: number, taxName?: string | null, taxNumber: string, state?: string | null, city?: string | null, country: string, streetAddress?: string | null, postalCode: string, website?: string | null, contactName: string, contactEmail: string } | null };
+
 export type ClientsQueryVariables = Exact<{
   filter?: InputMaybe<CompanyFilter>;
   paging?: InputMaybe<OffsetPaging>;
@@ -1140,6 +1401,20 @@ export type CreateClientMutationVariables = Exact<{
 
 export type CreateClientMutation = { __typename?: 'Mutation', createOneCompany: { __typename?: 'Company', id: string } };
 
+export type DeleteClientMutationVariables = Exact<{
+  input: DeleteOneCompanyInput;
+}>;
+
+
+export type DeleteClientMutation = { __typename?: 'Mutation', deleteOneCompany: { __typename?: 'CompanyDeleteResponse', id?: string | null } };
+
+export type UpdateClientMutationVariables = Exact<{
+  input: UpdateOneCompanyInput;
+}>;
+
+
+export type UpdateClientMutation = { __typename?: 'Mutation', updateOneCompany: { __typename?: 'Company', id: string } };
+
 export type ForgotPasswordMutationVariables = Exact<{
   input: ForgotPasswordInput;
 }>;
@@ -1154,6 +1429,34 @@ export type CreateInvoiceMutationVariables = Exact<{
 
 export type CreateInvoiceMutation = { __typename?: 'Mutation', createOneInvoice: { __typename?: 'Invoice', id: string } };
 
+export type CreateInvoiceItemsMutationVariables = Exact<{
+  input: CreateManyInvoiceItemsInput;
+}>;
+
+
+export type CreateInvoiceItemsMutation = { __typename?: 'Mutation', createManyInvoiceItems: Array<{ __typename?: 'InvoiceItem', id: string }> };
+
+export type DeleteInvoiceMutationVariables = Exact<{
+  input: DeleteOneInvoiceInput;
+}>;
+
+
+export type DeleteInvoiceMutation = { __typename?: 'Mutation', deleteOneInvoice: { __typename?: 'InvoiceDeleteResponse', id?: string | null } };
+
+export type DeleteInvoiceItemsMutationVariables = Exact<{
+  input: DeleteManyInvoiceItemsInput;
+}>;
+
+
+export type DeleteInvoiceItemsMutation = { __typename?: 'Mutation', deleteManyInvoiceItems: { __typename?: 'DeleteManyResponse', deletedCount: number } };
+
+export type InvoiceDetailsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type InvoiceDetailsQuery = { __typename?: 'Query', invoice?: { __typename?: 'Invoice', id: string, invoiceNumber: number, invoiceDate: string, dueDate?: string | null, paidDate?: string | null, status: InvoiceStatusEnum, company: { __typename?: 'Company', name: string, streetAddress?: string | null, city?: string | null, state?: string | null, country: string, postalCode: string, contactName: string, contactEmail: string }, items?: Array<{ __typename?: 'InvoiceItem', id: string, name: string, description?: string | null, discount?: number | null, price: number, quantity: number, unit?: string | null }> | null } | null };
+
 export type InvoicesQueryVariables = Exact<{
   filter?: InputMaybe<InvoiceFilter>;
   paging?: InputMaybe<OffsetPaging>;
@@ -1161,9 +1464,28 @@ export type InvoicesQueryVariables = Exact<{
 }>;
 
 
-export type InvoicesQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', invoices?: { __typename?: 'UserInvoicesConnection', totalCount: number, nodes: Array<{ __typename?: 'Invoice', id: string, invoiceNumber: string, invoiceDate: string, dueDate?: string | null, paidDate?: string | null, status: InvoiceStatusEnum, items?: Array<{ __typename?: 'InvoiceItem', id: string }> | null }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
+export type InvoicesQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', invoices?: { __typename?: 'UserInvoicesConnection', totalCount: number, nodes: Array<{ __typename?: 'Invoice', id: string, invoiceNumber: number, invoiceDate: string, dueDate?: string | null, paidDate?: string | null, status: InvoiceStatusEnum }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
 
-export type InvoiceItemsFragment = { __typename?: 'Invoice', items?: Array<{ __typename?: 'InvoiceItem', id: string }> | null };
+export type SearchClientsQueryVariables = Exact<{
+  filter?: InputMaybe<CompanyFilter>;
+}>;
+
+
+export type SearchClientsQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', clients?: { __typename?: 'UserClientsConnection', nodes: Array<{ __typename?: 'Company', id: string, name: string }> } | null } | null };
+
+export type UpdateInvoiceMutationVariables = Exact<{
+  input: UpdateOneInvoiceInput;
+}>;
+
+
+export type UpdateInvoiceMutation = { __typename?: 'Mutation', updateOneInvoice: { __typename?: 'Invoice', id: string } };
+
+export type UpdateInvoiceItemMutationVariables = Exact<{
+  input: UpdateOneInvoiceItemInput;
+}>;
+
+
+export type UpdateInvoiceItemMutation = { __typename?: 'Mutation', updateOneInvoiceItem: { __typename?: 'InvoiceItem', id: string } };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -1189,15 +1511,62 @@ export type RegisterMutation = { __typename?: 'Mutation', register: { __typename
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string, firstName: string, lastName?: string | null, profileImage?: string | null, company?: { __typename?: 'UserCompany', name: string, taxName?: string | null, taxRate: number, streetAddress?: string | null, city?: string | null, state?: string | null, country: string, postalCode: string, website?: string | null } | null } | null };
+export type ViewerQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string, firstName: string, lastName?: string | null, email: string, profileImage?: string | null, company?: { __typename?: 'UserCompany', name: string, taxName?: string | null, taxRate: number, taxNumber: string, streetAddress?: string | null, city?: string | null, state?: string | null, country: string, postalCode: string, website?: string | null, contactName: string, contactEmail: string } | null } | null };
 
-export const InvoiceItemsFragmentDoc = `
-    fragment invoiceItems on Invoice {
-  items {
+
+export const ClientDetailsDocument = `
+    query clientDetails($id: ID!) {
+  company(id: $id) {
     id
+    name
+    taxRate
+    taxName
+    taxNumber
+    state
+    city
+    country
+    streetAddress
+    postalCode
+    website
+    contactName
+    contactEmail
   }
 }
     `;
+export const useClientDetailsQuery = <
+      TData = ClientDetailsQuery,
+      TError = Error
+    >(
+      variables: ClientDetailsQueryVariables,
+      options?: UseQueryOptions<ClientDetailsQuery, TError, TData>
+    ) =>
+    useQuery<ClientDetailsQuery, TError, TData>(
+      ['clientDetails', variables],
+      axiosFetcher<ClientDetailsQuery, ClientDetailsQueryVariables>(ClientDetailsDocument, variables),
+      options
+    );
+
+useClientDetailsQuery.getKey = (variables: ClientDetailsQueryVariables) => ['clientDetails', variables];
+;
+
+export const useInfiniteClientDetailsQuery = <
+      TData = ClientDetailsQuery,
+      TError = Error
+    >(
+      variables: ClientDetailsQueryVariables,
+      options?: UseInfiniteQueryOptions<ClientDetailsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<ClientDetailsQuery, TError, TData>(
+      ['clientDetails.infinite', variables],
+      (metaData) => axiosFetcher<ClientDetailsQuery, ClientDetailsQueryVariables>(ClientDetailsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
+
+useInfiniteClientDetailsQuery.getKey = (variables: ClientDetailsQueryVariables) => ['clientDetails.infinite', variables];
+;
+
 export const ClientsDocument = `
     query clients($filter: CompanyFilter, $paging: OffsetPaging, $sorting: [CompanySort!]) {
   viewer {
@@ -1272,6 +1641,42 @@ export const useCreateClientMutation = <
     );
 useCreateClientMutation.getKey = () => ['createClient'];
 
+export const DeleteClientDocument = `
+    mutation deleteClient($input: DeleteOneCompanyInput!) {
+  deleteOneCompany(input: $input) {
+    id
+  }
+}
+    `;
+export const useDeleteClientMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteClientMutation, TError, DeleteClientMutationVariables, TContext>) =>
+    useMutation<DeleteClientMutation, TError, DeleteClientMutationVariables, TContext>(
+      ['deleteClient'],
+      (variables?: DeleteClientMutationVariables) => axiosFetcher<DeleteClientMutation, DeleteClientMutationVariables>(DeleteClientDocument, variables)(),
+      options
+    );
+useDeleteClientMutation.getKey = () => ['deleteClient'];
+
+export const UpdateClientDocument = `
+    mutation updateClient($input: UpdateOneCompanyInput!) {
+  updateOneCompany(input: $input) {
+    id
+  }
+}
+    `;
+export const useUpdateClientMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateClientMutation, TError, UpdateClientMutationVariables, TContext>) =>
+    useMutation<UpdateClientMutation, TError, UpdateClientMutationVariables, TContext>(
+      ['updateClient'],
+      (variables?: UpdateClientMutationVariables) => axiosFetcher<UpdateClientMutation, UpdateClientMutationVariables>(UpdateClientDocument, variables)(),
+      options
+    );
+useUpdateClientMutation.getKey = () => ['updateClient'];
+
 export const ForgotPasswordDocument = `
     mutation forgotPassword($input: ForgotPasswordInput!) {
   forgotPassword(input: $input)
@@ -1306,6 +1711,125 @@ export const useCreateInvoiceMutation = <
     );
 useCreateInvoiceMutation.getKey = () => ['createInvoice'];
 
+export const CreateInvoiceItemsDocument = `
+    mutation createInvoiceItems($input: CreateManyInvoiceItemsInput!) {
+  createManyInvoiceItems(input: $input) {
+    id
+  }
+}
+    `;
+export const useCreateInvoiceItemsMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateInvoiceItemsMutation, TError, CreateInvoiceItemsMutationVariables, TContext>) =>
+    useMutation<CreateInvoiceItemsMutation, TError, CreateInvoiceItemsMutationVariables, TContext>(
+      ['createInvoiceItems'],
+      (variables?: CreateInvoiceItemsMutationVariables) => axiosFetcher<CreateInvoiceItemsMutation, CreateInvoiceItemsMutationVariables>(CreateInvoiceItemsDocument, variables)(),
+      options
+    );
+useCreateInvoiceItemsMutation.getKey = () => ['createInvoiceItems'];
+
+export const DeleteInvoiceDocument = `
+    mutation deleteInvoice($input: DeleteOneInvoiceInput!) {
+  deleteOneInvoice(input: $input) {
+    id
+  }
+}
+    `;
+export const useDeleteInvoiceMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteInvoiceMutation, TError, DeleteInvoiceMutationVariables, TContext>) =>
+    useMutation<DeleteInvoiceMutation, TError, DeleteInvoiceMutationVariables, TContext>(
+      ['deleteInvoice'],
+      (variables?: DeleteInvoiceMutationVariables) => axiosFetcher<DeleteInvoiceMutation, DeleteInvoiceMutationVariables>(DeleteInvoiceDocument, variables)(),
+      options
+    );
+useDeleteInvoiceMutation.getKey = () => ['deleteInvoice'];
+
+export const DeleteInvoiceItemsDocument = `
+    mutation deleteInvoiceItems($input: DeleteManyInvoiceItemsInput!) {
+  deleteManyInvoiceItems(input: $input) {
+    deletedCount
+  }
+}
+    `;
+export const useDeleteInvoiceItemsMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteInvoiceItemsMutation, TError, DeleteInvoiceItemsMutationVariables, TContext>) =>
+    useMutation<DeleteInvoiceItemsMutation, TError, DeleteInvoiceItemsMutationVariables, TContext>(
+      ['deleteInvoiceItems'],
+      (variables?: DeleteInvoiceItemsMutationVariables) => axiosFetcher<DeleteInvoiceItemsMutation, DeleteInvoiceItemsMutationVariables>(DeleteInvoiceItemsDocument, variables)(),
+      options
+    );
+useDeleteInvoiceItemsMutation.getKey = () => ['deleteInvoiceItems'];
+
+export const InvoiceDetailsDocument = `
+    query invoiceDetails($id: ID!) {
+  invoice(id: $id) {
+    id
+    invoiceNumber
+    invoiceDate
+    dueDate
+    paidDate
+    status
+    company {
+      name
+      streetAddress
+      city
+      state
+      country
+      postalCode
+      contactName
+      contactEmail
+    }
+    items {
+      id
+      name
+      description
+      discount
+      price
+      quantity
+      unit
+    }
+  }
+}
+    `;
+export const useInvoiceDetailsQuery = <
+      TData = InvoiceDetailsQuery,
+      TError = Error
+    >(
+      variables: InvoiceDetailsQueryVariables,
+      options?: UseQueryOptions<InvoiceDetailsQuery, TError, TData>
+    ) =>
+    useQuery<InvoiceDetailsQuery, TError, TData>(
+      ['invoiceDetails', variables],
+      axiosFetcher<InvoiceDetailsQuery, InvoiceDetailsQueryVariables>(InvoiceDetailsDocument, variables),
+      options
+    );
+
+useInvoiceDetailsQuery.getKey = (variables: InvoiceDetailsQueryVariables) => ['invoiceDetails', variables];
+;
+
+export const useInfiniteInvoiceDetailsQuery = <
+      TData = InvoiceDetailsQuery,
+      TError = Error
+    >(
+      variables: InvoiceDetailsQueryVariables,
+      options?: UseInfiniteQueryOptions<InvoiceDetailsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<InvoiceDetailsQuery, TError, TData>(
+      ['invoiceDetails.infinite', variables],
+      (metaData) => axiosFetcher<InvoiceDetailsQuery, InvoiceDetailsQueryVariables>(InvoiceDetailsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
+
+useInfiniteInvoiceDetailsQuery.getKey = (variables: InvoiceDetailsQueryVariables) => ['invoiceDetails.infinite', variables];
+;
+
 export const InvoicesDocument = `
     query invoices($filter: InvoiceFilter, $paging: OffsetPaging, $sorting: [InvoiceSort!]) {
   viewer {
@@ -1317,7 +1841,6 @@ export const InvoicesDocument = `
         dueDate
         paidDate
         status
-        ...invoiceItems
       }
       pageInfo {
         hasNextPage
@@ -1327,7 +1850,7 @@ export const InvoicesDocument = `
     }
   }
 }
-    ${InvoiceItemsFragmentDoc}`;
+    `;
 export const useInvoicesQuery = <
       TData = InvoicesQuery,
       TError = Error
@@ -1361,6 +1884,88 @@ export const useInfiniteInvoicesQuery = <
 
 useInfiniteInvoicesQuery.getKey = (variables?: InvoicesQueryVariables) => variables === undefined ? ['invoices.infinite'] : ['invoices.infinite', variables];
 ;
+
+export const SearchClientsDocument = `
+    query searchClients($filter: CompanyFilter) {
+  viewer {
+    clients(filter: $filter, sorting: {direction: ASC, field: name}) {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+export const useSearchClientsQuery = <
+      TData = SearchClientsQuery,
+      TError = Error
+    >(
+      variables?: SearchClientsQueryVariables,
+      options?: UseQueryOptions<SearchClientsQuery, TError, TData>
+    ) =>
+    useQuery<SearchClientsQuery, TError, TData>(
+      variables === undefined ? ['searchClients'] : ['searchClients', variables],
+      axiosFetcher<SearchClientsQuery, SearchClientsQueryVariables>(SearchClientsDocument, variables),
+      options
+    );
+
+useSearchClientsQuery.getKey = (variables?: SearchClientsQueryVariables) => variables === undefined ? ['searchClients'] : ['searchClients', variables];
+;
+
+export const useInfiniteSearchClientsQuery = <
+      TData = SearchClientsQuery,
+      TError = Error
+    >(
+      variables?: SearchClientsQueryVariables,
+      options?: UseInfiniteQueryOptions<SearchClientsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<SearchClientsQuery, TError, TData>(
+      variables === undefined ? ['searchClients.infinite'] : ['searchClients.infinite', variables],
+      (metaData) => axiosFetcher<SearchClientsQuery, SearchClientsQueryVariables>(SearchClientsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
+
+useInfiniteSearchClientsQuery.getKey = (variables?: SearchClientsQueryVariables) => variables === undefined ? ['searchClients.infinite'] : ['searchClients.infinite', variables];
+;
+
+export const UpdateInvoiceDocument = `
+    mutation updateInvoice($input: UpdateOneInvoiceInput!) {
+  updateOneInvoice(input: $input) {
+    id
+  }
+}
+    `;
+export const useUpdateInvoiceMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateInvoiceMutation, TError, UpdateInvoiceMutationVariables, TContext>) =>
+    useMutation<UpdateInvoiceMutation, TError, UpdateInvoiceMutationVariables, TContext>(
+      ['updateInvoice'],
+      (variables?: UpdateInvoiceMutationVariables) => axiosFetcher<UpdateInvoiceMutation, UpdateInvoiceMutationVariables>(UpdateInvoiceDocument, variables)(),
+      options
+    );
+useUpdateInvoiceMutation.getKey = () => ['updateInvoice'];
+
+export const UpdateInvoiceItemDocument = `
+    mutation updateInvoiceItem($input: UpdateOneInvoiceItemInput!) {
+  updateOneInvoiceItem(input: $input) {
+    id
+  }
+}
+    `;
+export const useUpdateInvoiceItemMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateInvoiceItemMutation, TError, UpdateInvoiceItemMutationVariables, TContext>) =>
+    useMutation<UpdateInvoiceItemMutation, TError, UpdateInvoiceItemMutationVariables, TContext>(
+      ['updateInvoiceItem'],
+      (variables?: UpdateInvoiceItemMutationVariables) => axiosFetcher<UpdateInvoiceItemMutation, UpdateInvoiceItemMutationVariables>(UpdateInvoiceItemDocument, variables)(),
+      options
+    );
+useUpdateInvoiceItemMutation.getKey = () => ['updateInvoiceItem'];
 
 export const LoginDocument = `
     mutation login($input: LoginInput!) {
@@ -1422,17 +2027,21 @@ export const ViewerDocument = `
     id
     firstName
     lastName
+    email
     profileImage
     company {
       name
       taxName
       taxRate
+      taxNumber
       streetAddress
       city
       state
       country
       postalCode
       website
+      contactName
+      contactEmail
     }
   }
 }

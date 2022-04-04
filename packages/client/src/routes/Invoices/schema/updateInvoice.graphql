@@ -1,0 +1,5 @@
+mutation updateInvoice($input: UpdateOneInvoiceInput!) {
+    updateOneInvoice(input: $input) {
+        id
+    }
+}

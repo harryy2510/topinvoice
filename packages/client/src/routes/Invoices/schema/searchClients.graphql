@@ -1,0 +1,10 @@
+query searchClients($filter: CompanyFilter) {
+    viewer {
+        clients(filter: $filter, sorting: {direction: ASC, field: name}) {
+            nodes {
+                id
+                name
+            }
+        }
+    }
+}

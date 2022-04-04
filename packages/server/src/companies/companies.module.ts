@@ -18,6 +18,7 @@ import { CompanyEntity } from './entities/company.entity'
           EntityClass: CompanyEntity,
           CreateDTOClass: CreateCompanyDTO,
           UpdateDTOClass: UpdateCompanyDTO,
+          ServiceClass: CompaniesService,
           create: { many: { disabled: true } },
           update: { many: { disabled: true } },
           enableTotalCount: true,

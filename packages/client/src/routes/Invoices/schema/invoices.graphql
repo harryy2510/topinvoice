@@ -8,7 +8,6 @@ query invoices($filter: InvoiceFilter, $paging: OffsetPaging, $sorting: [Invoice
                 dueDate
                 paidDate
                 status
-                ...invoiceItems
             }
             pageInfo {
                 hasNextPage
@@ -19,9 +18,3 @@ query invoices($filter: InvoiceFilter, $paging: OffsetPaging, $sorting: [Invoice
     }
 }
 
-
-fragment invoiceItems on Invoice {
-    items {
-        id
-    }
-}

@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteProps, TextField } from '@mui/material'
+import { Autocomplete, AutocompleteProps, TextField, TextFieldProps } from '@mui/material'
 import { ReactNode } from 'react'
 import { Controller, UseControllerProps, useFormContext } from 'react-hook-form'
 import { FieldPath, FieldValues } from 'react-hook-form/dist/types'
@@ -6,10 +6,9 @@ import { FieldPath, FieldValues } from 'react-hook-form/dist/types'
 export type FormAutocompleteProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Omit<AutocompleteProps<any, false, true, false>, 'renderInput'> &
-  UseControllerProps<TFieldValues, TName> & {
-    label?: ReactNode
-  }
+> = Omit<AutocompleteProps<any, any, any, any>, 'renderInput'> &
+  UseControllerProps<TFieldValues, TName> &
+  Pick<TextFieldProps, 'label' | 'variant' | 'InputProps' | 'margin'>
 
 function FormAutocomplete<
   TFieldValues extends FieldValues = FieldValues,
@@ -20,6 +19,10 @@ function FormAutocomplete<
   shouldUnregister,
   defaultValue,
   control: _control,
+  label,
+  variant,
+  InputProps,
+  margin,
   ...props
 }: FormAutocompleteProps<TFieldValues, TName>) {
   const { control } = useFormContext<TFieldValues>()
@@ -37,8 +40,6 @@ function FormAutocomplete<
             size="small"
             autoHighlight
             autoComplete
-            disableClearable
-            getOptionLabel={(option: any) => option?.name ?? ''}
             {...props}
             value={value || ''}
             onChange={(...options) => {
@@ -50,7 +51,13 @@ function FormAutocomplete<
               <TextField
                 {...params}
                 placeholder={props.placeholder}
-                label={props.label}
+                label={label}
+                variant={variant}
+                InputProps={{
+                  ...InputProps,
+                  ...params.InputProps
+                }}
+                margin={margin}
                 error={invalid}
                 helperText={error?.message}
                 inputProps={{

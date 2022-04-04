@@ -1,0 +1,5 @@
+mutation updateClient($input: UpdateOneCompanyInput!) {
+    updateOneCompany(input: $input) {
+        id
+    }
+}

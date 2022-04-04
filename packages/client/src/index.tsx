@@ -1,3 +1,5 @@
+import { LocalizationProvider } from '@mui/lab'
+import DateAdapter from '@mui/lab/AdapterMoment'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
 import React from 'react'
@@ -23,7 +25,9 @@ ReactDOM.render(
             maxSnack={1}
             preventDuplicate
           >
-            <App />
+            <LocalizationProvider dateAdapter={DateAdapter}>
+              <App />
+            </LocalizationProvider>
           </SnackbarProvider>
         </ThemeProvider>
       </BrowserRouter>

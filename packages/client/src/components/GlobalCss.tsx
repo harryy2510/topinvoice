@@ -34,6 +34,13 @@ const GlobalCss: FC = () => {
           opacity: 0,
           transform: 'translate(0, 30px)',
           transition: 'opacity 250ms ease-out, transform 300ms ease'
+        },
+        '.main-layout .main-layout': {
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
+          maxWidth: '100%'
         }
       })}
     />

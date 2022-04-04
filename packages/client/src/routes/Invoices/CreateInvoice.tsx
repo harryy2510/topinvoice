@@ -4,29 +4,37 @@ import { Button, DialogActions, DialogContent, DialogProps } from '@mui/material
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
-import { CreateInvoice as ICreateInvoice, useInvoicesQuery, useCreateInvoiceMutation } from '../../graphql/generated'
+import { useNavigate } from 'react-router'
+import { CreateInvoice as ICreateInvoice, useCreateInvoiceMutation, useInvoicesQuery } from '../../graphql/generated'
 import withDialog from '../../hoc/withDialog'
 import InvoiceCreateForm, {
   CreateInvoiceDefaultValues,
   CreateInvoiceValidationSchema
 } from './components/InvoiceCreateForm'
 
-export type CreateInvoiceProps = DialogProps & {}
+export type CreateInvoiceProps = DialogProps & {
+  companyId?: string
+}
 
 const formId = 'create-invoice-form'
 
-const CreateInvoice: FC<CreateInvoiceProps> = ({ onClose }) => {
+const CreateInvoice: FC<CreateInvoiceProps> = ({ onClose, companyId }) => {
   const { mutateAsync, isLoading } = useCreateInvoiceMutation()
   const queryClient = useQueryClient()
-  const methods = useForm({
-    defaultValues: CreateInvoiceDefaultValues,
+  const navigate = useNavigate()
+  const methods = useForm<ICreateInvoice>({
+    defaultValues: {
+      ...CreateInvoiceDefaultValues,
+      ...(companyId ? { company: { id: companyId } } : {})
+    },
     resolver: yupResolver(CreateInvoiceValidationSchema)
   })
   const handleClose = () => onClose?.({}, 'backdropClick')
   const handleSubmit = async (invoice: ICreateInvoice) => {
-    await mutateAsync({ input: { invoice } })
+    const data = await mutateAsync({ input: { invoice } })
     queryClient.invalidateQueries(useInvoicesQuery.getKey())
     handleClose()
+    navigate(`/invoices/${data.createOneInvoice.id}`)
   }
   return (
     <>

@@ -140,40 +140,6 @@ const theme = createTheme({
         }
       }
     },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          opacity: 0.72
-        },
-        shrink: {
-          position: 'relative',
-          transform: 'translate(4px, 2px) scale(0.75)',
-          transformOrigin: 'left top'
-        }
-      }
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          opacity: 0.72,
-          transform: 'scale(0.75)',
-          transformOrigin: 'left bottom'
-        }
-      }
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: defaultTheme.shape.borderRadius * 2
-        },
-        notchedOutline: {
-          top: 0,
-          legend: {
-            display: 'none'
-          }
-        }
-      }
-    },
     MuiLink: {
       defaultProps: {
         underline: 'hover',
@@ -220,12 +186,63 @@ const theme = createTheme({
         }
       }
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          opacity: 0.72
+        },
+        outlined: {
+          position: 'relative',
+          transform: 'translate(4px, 2px) scale(0.75)',
+          transformOrigin: 'left top'
+        }
+      }
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          opacity: 0.72,
+          transform: 'scale(0.75)',
+          transformOrigin: 'left bottom'
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: defaultTheme.shape.borderRadius * 2
+        },
+        notchedOutline: {
+          top: 0,
+          legend: {
+            display: 'none'
+          }
+        }
+      }
+    },
+    MuiFilledInput: {
+      defaultProps: {
+        disableUnderline: true
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: defaultTheme.shape.borderRadius
+        }
+      }
+    },
     MuiTextField: {
       defaultProps: {
         variant: 'outlined',
         size: 'small',
         margin: 'dense',
         InputLabelProps: { shrink: true }
+      }
+    },
+    MuiPopper: {
+      defaultProps: {
+        style: {
+          zIndex: defaultTheme.zIndex.tooltip
+        }
       }
     }
   }

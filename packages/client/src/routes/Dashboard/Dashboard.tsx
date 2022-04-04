@@ -1,6 +1,8 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Link, Typography } from '@mui/material'
 import { GridColDef } from '@mui/x-data-grid'
 import { FC } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import Flex from '../../components/Flex'
 import MainLayout from '../../components/layouts/MainLayout'
 import { useClientsQuery, useInvoicesQuery } from '../../graphql/generated'
 import CompanyTable, { companyColumns } from '../Clients/components/CompanyTable'
@@ -21,15 +23,25 @@ const Dashboard: FC = () => {
     <MainLayout title="Dashboard">
       <Grid mt={-4} container spacing={8}>
         <Grid item xs={12} md={6}>
-          <Typography variant="subtitle2" mb={2}>
-            Top Clients
-          </Typography>
+          <Flex alignItems="center" mb={2}>
+            <Typography variant="subtitle1">Recent Clients</Typography>
+            {Boolean(clientsData?.viewer?.clients?.totalCount) && (
+              <Link ml={2} variant="body2" component={RouterLink} to="clients">
+                View All
+              </Link>
+            )}
+          </Flex>
           <CompanyTable columns={modifiedCompanyColumns} hideFooter data={clientsData} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="subtitle2" mb={2}>
-            Top Invoices
-          </Typography>
+          <Flex alignItems="center" mb={2}>
+            <Typography variant="subtitle1">Recent Invoices</Typography>
+            {Boolean(invoicesData?.viewer?.invoices?.totalCount) && (
+              <Link ml={2} variant="body2" component={RouterLink} to="invoices">
+                View All
+              </Link>
+            )}
+          </Flex>
           <InvoiceTable columns={modifiedInvoiceColumns} hideFooter data={invoicesData} />
         </Grid>
       </Grid>

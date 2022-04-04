@@ -13,6 +13,7 @@ interface CreatedByMany {
 export class CreatedByManyHook<T extends CreatedByMany> implements BeforeCreateManyHook<T, GraphQLExecutionContext> {
   async run(instance: CreateManyInputType<T>, context: GraphQLExecutionContext): Promise<CreateManyInputType<T>> {
     const loggedInUser: LoggedInUser = contextReqRes(context).req.user
+    console.log({ loggedInUser })
     instance.input = instance.input.map((input) => ({
       ...input,
       user: {

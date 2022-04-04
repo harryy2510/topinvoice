@@ -1,3 +1,4 @@
+import { SortDirection } from '@nestjs-query/core'
 import {
   Authorize,
   BeforeCreateMany,
@@ -9,7 +10,7 @@ import {
   Relation
 } from '@nestjs-query/query-graphql'
 import { UnPagedRelation } from '@nestjs-query/query-graphql/dist/src/decorators/relation.decorator'
-import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
+import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
 import ownerAuthorizer from 'src/common/authorizers/owner.authorizer'
 import { CreatedByManyHook } from 'src/common/hooks/CreatedByMany'
 import { CreatedByOneHook } from 'src/common/hooks/CreatedByOne'
@@ -35,45 +36,49 @@ import { InvoiceStatusEnum } from '../enums/invoice-status.enum'
 @BeforeCreateOne(CreatedByOneHook)
 @BeforeCreateMany(CreatedByManyHook)
 @Relation('user', () => UserEntity, { disableRemove: true })
-@Relation('company', () => CompanyEntity, { disableRemove: true })
+@Relation('company', () => CompanyEntity, { disableRemove: true, allowFiltering: true })
 @UnPagedRelation('items', () => InvoiceItemEntity, {
   disableUpdate: true,
   disableRemove: true,
   nullable: true
 })
-@QueryOptions({ pagingStrategy: PagingStrategies.OFFSET, enableTotalCount: true })
+@QueryOptions({
+  pagingStrategy: PagingStrategies.OFFSET,
+  enableTotalCount: true,
+  defaultSort: [{ direction: SortDirection.DESC, field: 'createdAt' }]
+})
 export class InvoiceEntity {
   @PrimaryColumn('varchar', { length: DEFAULT_ID_LENGTH, unique: true })
   @IDField(() => ID)
   id: string = defaultId()
 
-  @Column({ length: 20 })
+  @Column('integer')
   @FilterableField()
-  invoiceNumber: string
+  invoiceNumber: number
 
   @Column('enum', { enum: InvoiceStatusEnum })
   @FilterableField(() => InvoiceStatusEnum, { defaultValue: InvoiceStatusEnum.Draft })
   status: InvoiceStatusEnum
 
   @Column({ type: 'timestamp' })
-  @Field(() => GraphQLISODateTime)
-  invoiceDate: Date = new Date()
+  @FilterableField(() => GraphQLISODateTime)
+  invoiceDate: string
 
   @Column({ type: 'timestamp', nullable: true })
-  @Field(() => GraphQLISODateTime)
-  dueDate?: Date
+  @FilterableField(() => GraphQLISODateTime)
+  dueDate?: string
 
   @Column({ type: 'timestamp', nullable: true })
-  @Field(() => GraphQLISODateTime)
-  paidDate?: Date
+  @FilterableField(() => GraphQLISODateTime)
+  paidDate?: string
 
   @CreateDateColumn()
-  @Field(() => GraphQLISODateTime)
-  createdAt: Date
+  @FilterableField(() => GraphQLISODateTime)
+  createdAt: string
 
   @UpdateDateColumn()
-  @Field(() => GraphQLISODateTime)
-  updatedAt: Date
+  @FilterableField(() => GraphQLISODateTime)
+  updatedAt: string
 
   // relations
   @ManyToOne(() => UserEntity, (user) => user.invoices, {
