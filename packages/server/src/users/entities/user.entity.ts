@@ -9,7 +9,7 @@ import {
   PickType
 } from '@nestjs/graphql'
 import { hashSync } from 'bcrypt'
-import { EmailAddressScalar, PhoneNumberScalar } from 'src/common/scalars'
+import { EmailAddressScalar } from 'src/common/scalars'
 import defaultId, { DEFAULT_ID_LENGTH } from 'src/common/utils/default-id'
 import { CompanyEntity } from 'src/companies/entities/company.entity'
 import { InvoiceEntity } from 'src/invoices/entities/invoice.entity'
@@ -72,10 +72,6 @@ export class UserEntity {
   @Column('simple-json', { nullable: true })
   @Field(() => UserCompanyEntity)
   company?: UserCompanyEntity
-
-  @Column({ nullable: true })
-  @Field(() => PhoneNumberScalar)
-  phone?: string
 
   @Column('boolean', { default: false })
   active: boolean

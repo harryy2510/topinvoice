@@ -17,6 +17,7 @@ import accessTokenState from '../../recoil/atoms/accessTokenState'
 const schema = yup
   .object({
     firstName: yup.string().required('Required'),
+    lastName: yup.string(),
     email: yup.string().email('Should be a valid email address').required('Required'),
     password: yup
       .string()

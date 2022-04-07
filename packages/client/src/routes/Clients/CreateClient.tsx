@@ -4,9 +4,12 @@ import { Button, DialogActions, DialogContent, DialogProps } from '@mui/material
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
-import { CreateCompany, useClientsQuery, useCreateClientMutation } from '../../graphql/generated'
+import { UpdateUser, useClientsQuery, useCreateClientMutation } from '../../graphql/generated'
 import withDialog from '../../hoc/withDialog'
-import CompanyForm, { CreateCompanyDefaultValues, CreateCompanyValidationSchema } from './components/CompanyForm'
+import UserCompanyForm, {
+  UserCompanyDefaultValues,
+  UserCompanyValidationSchema
+} from '../Profile/components/UserCompanyForm'
 
 export type CreateClientProps = DialogProps
 
@@ -15,20 +18,20 @@ const formId = 'create-client-form'
 const CreateClient: FC<CreateClientProps> = ({ onClose }) => {
   const { mutateAsync, isLoading } = useCreateClientMutation()
   const queryClient = useQueryClient()
-  const methods = useForm({
-    defaultValues: CreateCompanyDefaultValues,
-    resolver: yupResolver(CreateCompanyValidationSchema)
+  const methods = useForm<UpdateUser>({
+    defaultValues: UserCompanyDefaultValues,
+    resolver: yupResolver(UserCompanyValidationSchema)
   })
   const handleClose = () => onClose?.({}, 'backdropClick')
-  const handleSubmit = async (company: CreateCompany) => {
-    await mutateAsync({ input: { company } })
+  const handleSubmit = async (updateUser: UpdateUser) => {
+    await mutateAsync({ input: { company: updateUser.company! } })
     queryClient.invalidateQueries(useClientsQuery.getKey())
     handleClose()
   }
   return (
     <>
       <DialogContent>
-        <CompanyForm id={formId} methods={methods} onSuccess={handleSubmit} />
+        <UserCompanyForm id={formId} methods={methods} onSuccess={handleSubmit} />
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'flex-end' }}>
         <Button onClick={handleClose} variant="text">

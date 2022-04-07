@@ -5,7 +5,6 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.yml --watch",
     "dev": "craco start",
-    "start": "echo true",
     "prebuild": "graphql-codegen --config codegen.yml",
     "build": "craco build"
   },

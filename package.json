@@ -4,8 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "lerna run --parallel dev",
+    "dev:client": "lerna --scope topinvoice-client exec -- yarn dev",
+    "dev:server": "lerna --scope topinvoice-server exec -- yarn dev",
     "codegen": "lerna --scope topinvoice-client exec -- yarn codegen",
-    "start": "lerna run --parallel start",
+    "start": "lerna --scope topinvoice-server exec -- yarn start",
     "build": "lerna run --parallel build",
     "build:client": "lerna --scope topinvoice-client exec -- yarn build",
     "build:server": "lerna --scope topinvoice-server exec -- yarn build",

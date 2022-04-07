@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { IsEmail, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, MaxLength } from 'class-validator'
-import { EmailAddressScalar, PasswordScalar, PhoneNumberScalar } from 'src/common/scalars'
+import { IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
+import { EmailAddressScalar, PasswordScalar } from 'src/common/scalars'
 
 @InputType('CreateUser')
 export class CreateUserDTO {
@@ -24,11 +24,6 @@ export class CreateUserDTO {
   @IsString()
   @Field(() => PasswordScalar)
   password: string
-
-  @Field(() => PhoneNumberScalar)
-  @IsOptional()
-  @IsPhoneNumber()
-  phone?: string
 
   @IsOptional()
   @IsString()

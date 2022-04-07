@@ -24,8 +24,6 @@ export type Scalars = {
   JSON: string;
   /** A field whose value conforms to strong password */
   Password: string;
-  /** A field whose value conforms to the standard E.164 format as specified in: https://en.wikipedia.org/wiki/E.164. Basically this is +17895551234. */
-  PhoneNumber: string;
   /** A field whose value conforms to the standard postal code formats for United States, United Kingdom, Germany, Canada, France, Italy, Australia, Netherlands, Spain, Denmark, Sweden, Belgium, India, Austria, Portugal, Switzerland or Luxembourg. */
   PostalCode: string;
 };
@@ -436,7 +434,6 @@ export type CreateUser = {
   firstName: Scalars['String'];
   lastName?: InputMaybe<Scalars['String']>;
   password: Scalars['Password'];
-  phone?: InputMaybe<Scalars['PhoneNumber']>;
   profileImage?: InputMaybe<Scalars['String']>;
 };
 
@@ -1260,7 +1257,6 @@ export type UpdateUser = {
   company?: InputMaybe<UpdateCompany>;
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['PhoneNumber']>;
   profileImage?: InputMaybe<Scalars['String']>;
 };
 
@@ -1277,7 +1273,6 @@ export type User = {
   invoices?: Maybe<UserInvoicesConnection>;
   lastName?: Maybe<Scalars['String']>;
   nextInvoiceNumber: Scalars['Int'];
-  phone?: Maybe<Scalars['PhoneNumber']>;
   profileImage?: Maybe<Scalars['String']>;
   provider?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
@@ -1494,12 +1489,12 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
 
-export type OnboardingMutationVariables = Exact<{
+export type UpdateUserMutationVariables = Exact<{
   input: UpdateOneUserInput;
 }>;
 
 
-export type OnboardingMutation = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: string } };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: string } };
 
 export type RegisterMutationVariables = Exact<{
   input: CreateUser;
@@ -1985,23 +1980,23 @@ export const useLoginMutation = <
     );
 useLoginMutation.getKey = () => ['login'];
 
-export const OnboardingDocument = `
-    mutation onboarding($input: UpdateOneUserInput!) {
+export const UpdateUserDocument = `
+    mutation updateUser($input: UpdateOneUserInput!) {
   updateOneUser(input: $input) {
     id
   }
 }
     `;
-export const useOnboardingMutation = <
+export const useUpdateUserMutation = <
       TError = Error,
       TContext = unknown
-    >(options?: UseMutationOptions<OnboardingMutation, TError, OnboardingMutationVariables, TContext>) =>
-    useMutation<OnboardingMutation, TError, OnboardingMutationVariables, TContext>(
-      ['onboarding'],
-      (variables?: OnboardingMutationVariables) => axiosFetcher<OnboardingMutation, OnboardingMutationVariables>(OnboardingDocument, variables)(),
+    >(options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>) =>
+    useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
+      ['updateUser'],
+      (variables?: UpdateUserMutationVariables) => axiosFetcher<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, variables)(),
       options
     );
-useOnboardingMutation.getKey = () => ['onboarding'];
+useUpdateUserMutation.getKey = () => ['updateUser'];
 
 export const RegisterDocument = `
     mutation register($input: CreateUser!) {

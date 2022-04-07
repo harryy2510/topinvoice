@@ -8,12 +8,13 @@ import { useQueryClient } from 'react-query'
 import {
   ClientDetailsQuery,
   UpdateCompany,
+  UpdateUser,
   useClientDetailsQuery,
   useClientsQuery,
   useUpdateClientMutation
 } from '../../graphql/generated'
 import withDialog from '../../hoc/withDialog'
-import CompanyForm, { CreateCompanyValidationSchema } from './components/CompanyForm'
+import UserCompanyForm, { UserCompanyValidationSchema } from '../Profile/components/UserCompanyForm'
 
 export type UpdateClientProps = DialogProps & {
   client: ClientDetailsQuery['company']
@@ -39,13 +40,13 @@ const updateKeys: Array<keyof UpdateCompany> = [
 const UpdateClient: FC<UpdateClientProps> = ({ onClose, client }) => {
   const { mutateAsync, isLoading } = useUpdateClientMutation()
   const queryClient = useQueryClient()
-  const methods = useForm<UpdateCompany>({
-    defaultValues: pick(client, ...updateKeys),
-    resolver: yupResolver(CreateCompanyValidationSchema)
+  const methods = useForm<UpdateUser>({
+    defaultValues: { company: pick(client, ...updateKeys) },
+    resolver: yupResolver(UserCompanyValidationSchema)
   })
   const handleClose = () => onClose?.({}, 'backdropClick')
-  const handleSubmit = async (company: UpdateCompany) => {
-    await mutateAsync({ input: { update: company, id: client!.id } })
+  const handleSubmit = async (updateUser: UpdateUser) => {
+    await mutateAsync({ input: { update: updateUser.company!, id: client!.id } })
     queryClient.invalidateQueries(useClientsQuery.getKey())
     queryClient.invalidateQueries(useClientDetailsQuery.getKey({ id: client!.id }))
     handleClose()
@@ -53,7 +54,7 @@ const UpdateClient: FC<UpdateClientProps> = ({ onClose, client }) => {
   return (
     <>
       <DialogContent>
-        <CompanyForm id={formId} methods={methods} onSuccess={handleSubmit} />
+        <UserCompanyForm id={formId} methods={methods} onSuccess={handleSubmit} />
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'flex-end' }}>
         <Button onClick={handleClose} variant="text">

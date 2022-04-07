@@ -400,7 +400,6 @@ input CreateUser {
   firstName: String!
   lastName: String
   password: Password!
-  phone: PhoneNumber
   profileImage: String
 }
 
@@ -922,11 +921,6 @@ type PageInfo {
 scalar Password
 
 """
-A field whose value conforms to the standard E.164 format as specified in: https://en.wikipedia.org/wiki/E.164. Basically this is +17895551234.
-"""
-scalar PhoneNumber
-
-"""
 A field whose value conforms to the standard postal code formats for United States, United Kingdom, Germany, Canada, France, Italy, Australia, Netherlands, Spain, Denmark, Sweden, Belgium, India, Austria, Portugal, Switzerland or Luxembourg.
 """
 scalar PostalCode
@@ -1126,7 +1120,6 @@ input UpdateUser {
   company: UpdateCompany
   firstName: String
   lastName: String
-  phone: PhoneNumber
   profileImage: String
 }
 
@@ -1169,7 +1162,6 @@ type User {
   ): UserInvoicesConnection
   lastName: String
   nextInvoiceNumber: Int!
-  phone: PhoneNumber
   profileImage: String
   provider: String
   updatedAt: DateTime!
