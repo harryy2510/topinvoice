@@ -202,6 +202,7 @@ const InvoiceDetail: FC = () => {
       if (promises.length) {
         await Promise.all(promises)
         queryClient.invalidateQueries(useInvoiceDetailsQuery.getKey({ id: id! }))
+        queryClient.invalidateQueries(useInvoicesQuery.getKey())
       }
     }
   }
