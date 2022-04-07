@@ -4,11 +4,11 @@ import {
   BeforeCreateMany,
   BeforeCreateOne,
   FilterableField,
+  FilterableOffsetConnection,
+  FilterableRelation,
   IDField,
-  OffsetConnection,
   PagingStrategies,
-  QueryOptions,
-  Relation
+  QueryOptions
 } from '@nestjs-query/query-graphql'
 import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
 import ownerAuthorizer from 'src/common/authorizers/owner.authorizer'
@@ -34,12 +34,13 @@ import {
 @Authorize(ownerAuthorizer)
 @BeforeCreateOne(CreatedByOneHook)
 @BeforeCreateMany(CreatedByManyHook)
-@Relation('user', () => UserEntity, { disableUpdate: true, disableRemove: true })
-@OffsetConnection('invoices', () => InvoiceEntity, {
+@FilterableRelation('user', () => UserEntity, { disableUpdate: true, disableRemove: true, allowFiltering: true })
+@FilterableOffsetConnection('invoices', () => InvoiceEntity, {
   disableUpdate: true,
   disableRemove: true,
   nullable: true,
-  enableTotalCount: true
+  enableTotalCount: true,
+  allowFiltering: true
 })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,

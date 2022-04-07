@@ -26,14 +26,14 @@ const MainLayout: FC<MainLayoutProps> = ({ actions, title, onAddClick, Container
             </Typography>
           )}
         </div>
-        <div>
+        <Flex alignItems="center">
           {actions}
           {onAddClick && (
             <IconButton sx={{ borderColor: 'divider', borderWidth: 1, borderStyle: 'solid' }} onClick={onAddClick}>
               <AddOutlined />
             </IconButton>
           )}
-        </div>
+        </Flex>
       </Flex>
     )}
     {children}

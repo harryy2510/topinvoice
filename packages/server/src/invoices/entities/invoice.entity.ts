@@ -4,12 +4,12 @@ import {
   BeforeCreateMany,
   BeforeCreateOne,
   FilterableField,
+  FilterableRelation,
+  FilterableUnPagedRelation,
   IDField,
   PagingStrategies,
-  QueryOptions,
-  Relation
+  QueryOptions
 } from '@nestjs-query/query-graphql'
-import { UnPagedRelation } from '@nestjs-query/query-graphql/dist/src/decorators/relation.decorator'
 import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
 import ownerAuthorizer from 'src/common/authorizers/owner.authorizer'
 import { CreatedByManyHook } from 'src/common/hooks/CreatedByMany'
@@ -35,12 +35,13 @@ import { InvoiceStatusEnum } from '../enums/invoice-status.enum'
 @Authorize(ownerAuthorizer)
 @BeforeCreateOne(CreatedByOneHook)
 @BeforeCreateMany(CreatedByManyHook)
-@Relation('user', () => UserEntity, { disableRemove: true })
-@Relation('company', () => CompanyEntity, { disableRemove: true, allowFiltering: true })
-@UnPagedRelation('items', () => InvoiceItemEntity, {
+@FilterableRelation('user', () => UserEntity, { disableRemove: true, allowFiltering: true })
+@FilterableRelation('company', () => CompanyEntity, { disableRemove: true, allowFiltering: true })
+@FilterableUnPagedRelation('items', () => InvoiceItemEntity, {
   disableUpdate: true,
   disableRemove: true,
-  nullable: true
+  nullable: true,
+  allowFiltering: true
 })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,

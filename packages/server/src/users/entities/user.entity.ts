@@ -1,4 +1,4 @@
-import { Authorize, IDField, OffsetConnection } from '@nestjs-query/query-graphql'
+import { Authorize, FilterableOffsetConnection, IDField, OffsetConnection } from '@nestjs-query/query-graphql'
 import {
   Field,
   GraphQLExecutionContext,
@@ -36,23 +36,26 @@ export class UserCompanyEntity extends PickType(CompanyEntity, [
 @Entity('User')
 @ObjectType('User')
 @Authorize({ authorize: (context: GraphQLExecutionContext) => ({ id: { eq: contextReqRes(context).req.user.id } }) })
-@OffsetConnection('clients', () => CompanyEntity, {
+@FilterableOffsetConnection('clients', () => CompanyEntity, {
   disableUpdate: true,
   disableRemove: true,
   nullable: true,
-  enableTotalCount: true
+  enableTotalCount: true,
+  allowFiltering: true
 })
-@OffsetConnection('invoices', () => InvoiceEntity, {
+@FilterableOffsetConnection('invoices', () => InvoiceEntity, {
   disableUpdate: true,
   disableRemove: true,
   nullable: true,
-  enableTotalCount: true
+  enableTotalCount: true,
+  allowFiltering: true
 })
-@OffsetConnection('invoiceItems', () => InvoiceItemEntity, {
+@FilterableOffsetConnection('invoiceItems', () => InvoiceItemEntity, {
   disableUpdate: true,
   disableRemove: true,
   nullable: true,
-  enableTotalCount: true
+  enableTotalCount: true,
+  allowFiltering: true
 })
 export class UserEntity {
   @PrimaryColumn('varchar', { length: DEFAULT_ID_LENGTH, unique: true })

@@ -109,8 +109,8 @@ const InvoiceDetail: FC = () => {
     variant: 'popper'
   })
   const { renderCountry, renderState, getCountry } = useCountryState()
-  const { data: invoiceDetailsQuery } = useInvoiceDetailsQuery({ id: id! })
-  const { data: viewerQuery } = useViewerQuery()
+  const invoice = useInvoiceDetailsQuery({ id: id! })?.data?.invoice
+  const viewer = useViewerQuery()?.data?.viewer
   const queryClient = useQueryClient()
   const navigate = useNavigate()
 
@@ -122,9 +122,6 @@ const InvoiceDetail: FC = () => {
 
   const isLoading =
     updateInvoiceLoading || createInvoiceItemsLoading || updateInvoiceItemLoading || deleteInvoiceItemsLoading
-
-  const invoice = invoiceDetailsQuery?.invoice
-  const viewer = viewerQuery?.viewer
 
   const methods = useForm<UpdateInvoiceDetails>({
     defaultValues: {},

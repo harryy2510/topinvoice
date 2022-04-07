@@ -8,6 +8,9 @@ query invoices($filter: InvoiceFilter, $paging: OffsetPaging, $sorting: [Invoice
                 dueDate
                 paidDate
                 status
+                company {
+                    name
+                }
             }
             pageInfo {
                 hasNextPage

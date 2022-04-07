@@ -1,6 +1,5 @@
 import { Autocomplete, AutocompleteProps, TextField, TextFieldProps } from '@mui/material'
-import { ReactNode } from 'react'
-import { Controller, UseControllerProps, useFormContext } from 'react-hook-form'
+import { Controller, FieldError, UseControllerProps, useFormContext } from 'react-hook-form'
 import { FieldPath, FieldValues } from 'react-hook-form/dist/types'
 
 export type FormAutocompleteProps<
@@ -9,6 +8,50 @@ export type FormAutocompleteProps<
 > = Omit<AutocompleteProps<any, any, any, any>, 'renderInput'> &
   UseControllerProps<TFieldValues, TName> &
   Pick<TextFieldProps, 'label' | 'variant' | 'InputProps' | 'margin'>
+
+export function EnhancedAutocomplete({
+  label,
+  variant,
+  InputProps,
+  margin,
+  invalid,
+  error,
+  ...props
+}: Omit<AutocompleteProps<any, any, any, any>, 'renderInput'> &
+  Pick<TextFieldProps, 'label' | 'variant' | 'InputProps' | 'margin'> & {
+    invalid?: boolean
+    error?: FieldError
+  }) {
+  return (
+    <Autocomplete
+      fullWidth
+      size="small"
+      autoHighlight
+      autoComplete
+      {...props}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          placeholder={props.placeholder}
+          label={label}
+          variant={variant}
+          InputProps={{
+            ...InputProps,
+            ...params.InputProps
+          }}
+          margin={margin}
+          error={invalid}
+          helperText={error?.message}
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: 'new-password'
+          }}
+          InputLabelProps={{ ...params.InputLabelProps, shrink: true }}
+        />
+      )}
+    />
+  )
+}
 
 function FormAutocomplete<
   TFieldValues extends FieldValues = FieldValues,
@@ -35,11 +78,7 @@ function FormAutocomplete<
       control={_control || control}
       render={({ field: { value, onChange, onBlur }, fieldState: { invalid, error } }) => (
         <>
-          <Autocomplete
-            fullWidth
-            size="small"
-            autoHighlight
-            autoComplete
+          <EnhancedAutocomplete
             {...props}
             value={value || ''}
             onChange={(...options) => {
@@ -47,26 +86,8 @@ function FormAutocomplete<
               props.onChange?.(...options)
             }}
             onBlur={onBlur}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder={props.placeholder}
-                label={label}
-                variant={variant}
-                InputProps={{
-                  ...InputProps,
-                  ...params.InputProps
-                }}
-                margin={margin}
-                error={invalid}
-                helperText={error?.message}
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: 'new-password'
-                }}
-                InputLabelProps={{ ...params.InputLabelProps, shrink: true }}
-              />
-            )}
+            invalid={invalid}
+            error={error}
           />
         </>
       )}

@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import MainLayout from '../../components/layouts/MainLayout'
 import { CompanySortFields, useClientsQuery } from '../../graphql/generated'
 import useTableModifiers from '../../hooks/useTableModifiers'
-import CompanyTable from './components/CompanyTable'
+import ClientTable from './components/ClientTable'
 import CreateClient from './CreateClient'
 
 const Clients: FC = () => {
@@ -18,7 +18,7 @@ const Clients: FC = () => {
   return (
     <MainLayout title="Clients" onAddClick={() => setAddOpen(true)}>
       <CreateClient open={addOpen} onClose={() => setAddOpen(false)} />
-      <CompanyTable {...tableProps} loading={isFetching} data={data} />
+      <ClientTable {...tableProps} loading={isFetching} data={data} />
     </MainLayout>
   )
 }

@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { LoadingButton } from '@mui/lab'
 import { Button, DialogActions, DialogContent, DialogProps } from '@mui/material'
 import { pick } from 'lodash-es'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
 import {
@@ -37,7 +37,8 @@ const updateKeys: Array<keyof UpdateCompany> = [
   'website'
 ]
 
-const UpdateClient: FC<UpdateClientProps> = ({ onClose, client }) => {
+const UpdateClient: FC<UpdateClientProps> = ({ onClose, client: _client }) => {
+  const client = useRef(_client).current
   const { mutateAsync, isLoading } = useUpdateClientMutation()
   const queryClient = useQueryClient()
   const methods = useForm<UpdateUser>({

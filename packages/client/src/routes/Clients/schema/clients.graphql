@@ -9,6 +9,11 @@ query clients($filter: CompanyFilter, $paging: OffsetPaging, $sorting: [CompanyS
                 state
                 city
                 country
+                invoicesAggregate {
+                    count {
+                        id
+                    }
+                }
             }
             pageInfo {
                 hasNextPage

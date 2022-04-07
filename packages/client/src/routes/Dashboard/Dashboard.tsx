@@ -5,16 +5,16 @@ import { Link as RouterLink } from 'react-router-dom'
 import Flex from '../../components/Flex'
 import MainLayout from '../../components/layouts/MainLayout'
 import { useClientsQuery, useInvoicesQuery } from '../../graphql/generated'
-import CompanyTable, { companyColumns } from '../Clients/components/CompanyTable'
+import ClientTable, { clientColumns } from '../Clients/components/ClientTable'
 import InvoiceTable, { invoiceColumns } from '../Invoices/components/InvoiceTable'
 
-const modifiedCompanyColumns = companyColumns
-  .slice(0, 2)
-  .map((column): GridColDef => ({ ...column, sortable: false, width: 260 }))
+const modifiedClientColumns = clientColumns
+  .slice(0, 3)
+  .map((column): GridColDef => ({ ...column, sortable: false, width: column.width! * 0.75 }))
 
 const modifiedInvoiceColumns = invoiceColumns
-  .slice(0, 3)
-  .map((column): GridColDef => ({ ...column, sortable: false, width: 180 }))
+  .slice(0, 4)
+  .map((column): GridColDef => ({ ...column, sortable: false, width: column.width! * 0.85 }))
 
 const Dashboard: FC = () => {
   const { data: invoicesData } = useInvoicesQuery({ paging: { limit: 5 } })
@@ -31,7 +31,7 @@ const Dashboard: FC = () => {
               </Link>
             )}
           </Flex>
-          <CompanyTable columns={modifiedCompanyColumns} hideFooter data={clientsData} />
+          <ClientTable columns={modifiedClientColumns} hideFooter data={clientsData} />
         </Grid>
         <Grid item xs={12} md={6}>
           <Flex alignItems="center" mb={2}>

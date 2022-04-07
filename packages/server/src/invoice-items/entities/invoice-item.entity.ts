@@ -3,10 +3,10 @@ import {
   BeforeCreateMany,
   BeforeCreateOne,
   FilterableField,
+  FilterableRelation,
   IDField,
   PagingStrategies,
-  QueryOptions,
-  Relation
+  QueryOptions
 } from '@nestjs-query/query-graphql'
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql'
 import ownerAuthorizer from 'src/common/authorizers/owner.authorizer'
@@ -22,8 +22,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn,
 @Authorize(ownerAuthorizer)
 @BeforeCreateOne(CreatedByOneHook)
 @BeforeCreateMany(CreatedByManyHook)
-@Relation('user', () => UserEntity, { disableUpdate: true, disableRemove: true })
-@Relation('invoice', () => InvoiceEntity, { disableUpdate: true, disableRemove: true })
+@FilterableRelation('user', () => UserEntity, { disableUpdate: true, disableRemove: true, allowFiltering: true })
+@FilterableRelation('invoice', () => InvoiceEntity, { disableUpdate: true, disableRemove: true, allowFiltering: true })
 @QueryOptions({ pagingStrategy: PagingStrategies.NONE })
 export class InvoiceItemEntity {
   @PrimaryColumn('varchar', { length: DEFAULT_ID_LENGTH, unique: true })

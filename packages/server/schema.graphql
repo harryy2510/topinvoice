@@ -163,6 +163,7 @@ input CompanyFilter {
   country: CountryCodeAdaptedScalarFilterComparison
   createdAt: DateFieldComparison
   id: IDFilterComparison
+  invoices: CompanyFilterInvoiceFilter
   name: StringFieldComparison
   or: [CompanyFilter!]
   postalCode: PostalCodeAdaptedScalarFilterComparison
@@ -172,7 +173,27 @@ input CompanyFilter {
   taxNumber: StringFieldComparison
   taxRate: NumberFieldComparison
   updatedAt: DateFieldComparison
+  user: CompanyFilterUserFilter
   website: StringFieldComparison
+}
+
+input CompanyFilterInvoiceFilter {
+  and: [CompanyFilterInvoiceFilter!]
+  createdAt: DateFieldComparison
+  dueDate: DateFieldComparison
+  id: IDFilterComparison
+  invoiceDate: DateFieldComparison
+  invoiceNumber: NumberFieldComparison
+  or: [CompanyFilterInvoiceFilter!]
+  paidDate: DateFieldComparison
+  status: InvoiceStatusEnumFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+input CompanyFilterUserFilter {
+  and: [CompanyFilterUserFilter!]
+  id: IDFilterComparison
+  or: [CompanyFilterUserFilter!]
 }
 
 type CompanyInvoicesAggregateGroupBy {
@@ -639,10 +660,12 @@ input InvoiceFilter {
   id: IDFilterComparison
   invoiceDate: DateFieldComparison
   invoiceNumber: NumberFieldComparison
+  items: InvoiceFilterInvoiceItemFilter
   or: [InvoiceFilter!]
   paidDate: DateFieldComparison
   status: InvoiceStatusEnumFilterComparison
   updatedAt: DateFieldComparison
+  user: InvoiceFilterUserFilter
 }
 
 input InvoiceFilterCompanyFilter {
@@ -663,6 +686,19 @@ input InvoiceFilterCompanyFilter {
   taxRate: NumberFieldComparison
   updatedAt: DateFieldComparison
   website: StringFieldComparison
+}
+
+input InvoiceFilterInvoiceItemFilter {
+  and: [InvoiceFilterInvoiceItemFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  or: [InvoiceFilterInvoiceItemFilter!]
+}
+
+input InvoiceFilterUserFilter {
+  and: [InvoiceFilterUserFilter!]
+  id: IDFilterComparison
+  or: [InvoiceFilterUserFilter!]
 }
 
 type InvoiceItem {
@@ -713,8 +749,29 @@ type InvoiceItemDeleteResponse {
 input InvoiceItemFilter {
   and: [InvoiceItemFilter!]
   id: IDFilterComparison
+  invoice: InvoiceItemFilterInvoiceFilter
   name: StringFieldComparison
   or: [InvoiceItemFilter!]
+  user: InvoiceItemFilterUserFilter
+}
+
+input InvoiceItemFilterInvoiceFilter {
+  and: [InvoiceItemFilterInvoiceFilter!]
+  createdAt: DateFieldComparison
+  dueDate: DateFieldComparison
+  id: IDFilterComparison
+  invoiceDate: DateFieldComparison
+  invoiceNumber: NumberFieldComparison
+  or: [InvoiceItemFilterInvoiceFilter!]
+  paidDate: DateFieldComparison
+  status: InvoiceStatusEnumFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+input InvoiceItemFilterUserFilter {
+  and: [InvoiceItemFilterUserFilter!]
+  id: IDFilterComparison
+  or: [InvoiceItemFilterUserFilter!]
 }
 
 type InvoiceItemMaxAggregate {

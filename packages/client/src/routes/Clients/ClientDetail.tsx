@@ -28,7 +28,6 @@ import { useParams } from 'react-router-dom'
 import MainLayout from '../../components/layouts/MainLayout'
 import Loading from '../../components/Loading'
 import {
-  InvoiceSortFields,
   useClientDetailsQuery,
   useClientsQuery,
   useDeleteClientMutation,
@@ -36,8 +35,6 @@ import {
   useViewerQuery
 } from '../../graphql/generated'
 import useCountryState from '../../hooks/useCountryState'
-import useTableModifiers from '../../hooks/useTableModifiers'
-import InvoiceTable from '../Invoices/components/InvoiceTable'
 import Invoices from '../Invoices/Invoices'
 import UpdateClient from './UpdateClient'
 
@@ -49,27 +46,13 @@ const ClientDetail: FC = () => {
     variant: 'popper'
   })
   const { renderCountry, renderState } = useCountryState()
-  const { data: clientDetailsQuery } = useClientDetailsQuery({ id: id! })
-  const { data: viewerQuery } = useViewerQuery()
+  const client = useClientDetailsQuery({ id: id! })?.data?.company
+  const viewer = useViewerQuery()?.data?.viewer
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-
-  const { paging, sortBy, tableProps, direction } = useTableModifiers<InvoiceSortFields>()
-  const { data, isFetching } = useInvoicesQuery(
-    {
-      paging,
-      ...(sortBy && direction ? { sorting: { field: sortBy, direction } } : {}),
-      filter: { company: { id: { eq: id } } }
-    },
-    { keepPreviousData: true }
-  )
-
   const [tab, setTab] = useState('1')
 
   const { mutateAsync: deleteClient, isLoading: deleteClientLoading } = useDeleteClientMutation()
-
-  const client = clientDetailsQuery?.company
-  const viewer = viewerQuery?.viewer
 
   const handleDelete = async () => {
     popupState.close()
@@ -256,7 +239,7 @@ const ClientDetail: FC = () => {
           </Grid>
         </TabPanel>
         <TabPanel value="2">
-          <Invoices companyId={client.id} />
+          <Invoices clientId={client.id} />
         </TabPanel>
       </TabContext>
       <UpdateClient open={updateOpen} onClose={() => setUpdateOpen(false)} client={client} />

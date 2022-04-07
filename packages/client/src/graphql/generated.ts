@@ -194,6 +194,7 @@ export type CompanyFilter = {
   country?: InputMaybe<CountryCodeAdaptedScalarFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  invoices?: InputMaybe<CompanyFilterInvoiceFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CompanyFilter>>;
   postalCode?: InputMaybe<PostalCodeAdaptedScalarFilterComparison>;
@@ -203,7 +204,27 @@ export type CompanyFilter = {
   taxNumber?: InputMaybe<StringFieldComparison>;
   taxRate?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  user?: InputMaybe<CompanyFilterUserFilter>;
   website?: InputMaybe<StringFieldComparison>;
+};
+
+export type CompanyFilterInvoiceFilter = {
+  and?: InputMaybe<Array<CompanyFilterInvoiceFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<CompanyFilterInvoiceFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
+  status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type CompanyFilterUserFilter = {
+  and?: InputMaybe<Array<CompanyFilterUserFilter>>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<CompanyFilterUserFilter>>;
 };
 
 export type CompanyInvoicesAggregateGroupBy = {
@@ -673,10 +694,12 @@ export type InvoiceFilter = {
   id?: InputMaybe<IdFilterComparison>;
   invoiceDate?: InputMaybe<DateFieldComparison>;
   invoiceNumber?: InputMaybe<NumberFieldComparison>;
+  items?: InputMaybe<InvoiceFilterInvoiceItemFilter>;
   or?: InputMaybe<Array<InvoiceFilter>>;
   paidDate?: InputMaybe<DateFieldComparison>;
   status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  user?: InputMaybe<InvoiceFilterUserFilter>;
 };
 
 export type InvoiceFilterCompanyFilter = {
@@ -697,6 +720,19 @@ export type InvoiceFilterCompanyFilter = {
   taxRate?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   website?: InputMaybe<StringFieldComparison>;
+};
+
+export type InvoiceFilterInvoiceItemFilter = {
+  and?: InputMaybe<Array<InvoiceFilterInvoiceItemFilter>>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<InvoiceFilterInvoiceItemFilter>>;
+};
+
+export type InvoiceFilterUserFilter = {
+  and?: InputMaybe<Array<InvoiceFilterUserFilter>>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<InvoiceFilterUserFilter>>;
 };
 
 export type InvoiceItem = {
@@ -751,8 +787,29 @@ export type InvoiceItemDeleteResponse = {
 export type InvoiceItemFilter = {
   and?: InputMaybe<Array<InvoiceItemFilter>>;
   id?: InputMaybe<IdFilterComparison>;
+  invoice?: InputMaybe<InvoiceItemFilterInvoiceFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<InvoiceItemFilter>>;
+  user?: InputMaybe<InvoiceItemFilterUserFilter>;
+};
+
+export type InvoiceItemFilterInvoiceFilter = {
+  and?: InputMaybe<Array<InvoiceItemFilterInvoiceFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dueDate?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  invoiceDate?: InputMaybe<DateFieldComparison>;
+  invoiceNumber?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<InvoiceItemFilterInvoiceFilter>>;
+  paidDate?: InputMaybe<DateFieldComparison>;
+  status?: InputMaybe<InvoiceStatusEnumFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type InvoiceItemFilterUserFilter = {
+  and?: InputMaybe<Array<InvoiceItemFilterUserFilter>>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<InvoiceItemFilterUserFilter>>;
 };
 
 export type InvoiceItemMaxAggregate = {
@@ -1387,7 +1444,7 @@ export type ClientsQueryVariables = Exact<{
 }>;
 
 
-export type ClientsQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', clients?: { __typename?: 'UserClientsConnection', totalCount: number, nodes: Array<{ __typename?: 'Company', id: string, name: string, taxRate: number, taxName?: string | null, state?: string | null, city?: string | null, country: string }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
+export type ClientsQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', clients?: { __typename?: 'UserClientsConnection', totalCount: number, nodes: Array<{ __typename?: 'Company', id: string, name: string, taxRate: number, taxName?: string | null, state?: string | null, city?: string | null, country: string, invoicesAggregate: Array<{ __typename?: 'CompanyInvoicesAggregateResponse', count?: { __typename?: 'CompanyInvoicesCountAggregate', id?: number | null } | null }> }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
 
 export type CreateClientMutationVariables = Exact<{
   input: CreateOneCompanyInput;
@@ -1459,7 +1516,7 @@ export type InvoicesQueryVariables = Exact<{
 }>;
 
 
-export type InvoicesQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', invoices?: { __typename?: 'UserInvoicesConnection', totalCount: number, nodes: Array<{ __typename?: 'Invoice', id: string, invoiceNumber: number, invoiceDate: string, dueDate?: string | null, paidDate?: string | null, status: InvoiceStatusEnum }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
+export type InvoicesQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', invoices?: { __typename?: 'UserInvoicesConnection', totalCount: number, nodes: Array<{ __typename?: 'Invoice', id: string, invoiceNumber: number, invoiceDate: string, dueDate?: string | null, paidDate?: string | null, status: InvoiceStatusEnum, company: { __typename?: 'Company', name: string } }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, hasPreviousPage?: boolean | null } } | null } | null };
 
 export type SearchClientsQueryVariables = Exact<{
   filter?: InputMaybe<CompanyFilter>;
@@ -1574,6 +1631,11 @@ export const ClientsDocument = `
         state
         city
         country
+        invoicesAggregate {
+          count {
+            id
+          }
+        }
       }
       pageInfo {
         hasNextPage
@@ -1836,6 +1898,9 @@ export const InvoicesDocument = `
         dueDate
         paidDate
         status
+        company {
+          name
+        }
       }
       pageInfo {
         hasNextPage
