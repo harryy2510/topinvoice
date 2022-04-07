@@ -46,206 +46,208 @@ const darkPalette: PaletteOptions = {
   tonalOffset: 0.05
 }
 
-const palette: PaletteOptions = darkPalette
-
-const theme = createTheme({
-  palette,
-  typography: {
-    fontFamily: 'Poppins, sans-serif'
-  },
-  shadows,
-  shape: {
-    borderRadius: defaultTheme.shape.borderRadius * 1.5
-  },
-  mixins: {
-    toolbar: {
-      height: defaultTheme.spacing(8)
-    }
-  },
-  components: {
-    MuiAppBar: {
-      defaultProps: {
-        elevation: 1
+const themeBuilder = (palette: PaletteOptions) =>
+  createTheme({
+    palette,
+    typography: {
+      fontFamily: 'Poppins, sans-serif'
+    },
+    shadows,
+    shape: {
+      borderRadius: defaultTheme.shape.borderRadius * 1.5
+    },
+    mixins: {
+      toolbar: {
+        height: defaultTheme.spacing(8)
       }
     },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          fontWeight: 500,
-          textTransform: 'none',
-          padding: defaultTheme.spacing(2, 3),
-          minHeight: defaultTheme.spacing(5)
+    components: {
+      MuiAppBar: {
+        defaultProps: {
+          elevation: 1
         }
-      }
-    },
-    MuiTabs: {
-      styleOverrides: {
-        root: {
-          minHeight: defaultTheme.spacing(5)
-        }
-      }
-    },
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true,
-        variant: 'contained'
       },
-      styleOverrides: {
-        root: {
-          textTransform: 'none'
-        },
-        startIcon: {
-          marginRight: 4
-        },
-        outlinedPrimary: {
-          borderColor: alpha((palette.primary as SimplePaletteColorOptions).main, 0.2)
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            fontWeight: 500,
+            textTransform: 'none',
+            padding: defaultTheme.spacing(2, 3),
+            minHeight: defaultTheme.spacing(5)
+          }
         }
-      }
-    },
-    MuiMenu: {
-      defaultProps: {
-        elevation: 2
-      }
-    },
-    MuiPaper: {
-      defaultProps: {
-        elevation: 2
-      }
-    },
-    MuiPopover: {
-      defaultProps: {
-        elevation: 2
-      }
-    },
-    MuiDialog: {
-      defaultProps: {
-        keepMounted: false,
-        fullWidth: true,
-        maxWidth: 'sm',
-        PaperProps: {
+      },
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            minHeight: defaultTheme.spacing(5)
+          }
+        }
+      },
+      MuiButton: {
+        defaultProps: {
+          disableElevation: true,
+          variant: 'contained'
+        },
+        styleOverrides: {
+          root: {
+            textTransform: 'none'
+          },
+          startIcon: {
+            marginRight: 4
+          },
+          outlinedPrimary: {
+            borderColor: alpha((palette.primary as SimplePaletteColorOptions).main, 0.2)
+          }
+        }
+      },
+      MuiMenu: {
+        defaultProps: {
           elevation: 2
         }
       },
-      styleOverrides: {
-        root: {
-          backdropFilter: 'blur(2px)'
+      MuiPaper: {
+        defaultProps: {
+          elevation: 2
         }
-      }
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          fontSize: '1.5rem',
-          fontWeight: 600
-        }
-      }
-    },
-    MuiLink: {
-      defaultProps: {
-        underline: 'hover',
-        fontWeight: 500,
-        href: '#'
-      }
-    },
-    MuiListItemIcon: {
-      styleOverrides: {
-        root: {
-          minWidth: defaultTheme.spacing(4)
-        }
-      }
-    },
-    MuiChip: {
-      styleOverrides: {
-        root: {
-          fontWeight: 600
-        }
-      }
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          backgroundImage: 'none'
-        }
-      }
-    },
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          '&, &:last-child': {
-            padding: defaultTheme.spacing(3)
-          }
-        }
-      }
-    },
-    MuiDialogActions: {
-      styleOverrides: {
-        root: {
-          borderTop: `1px solid ${defaultTheme.palette.divider}`,
-          justifyContent: 'flex-start',
-          padding: defaultTheme.spacing(2.5, 3)
-        }
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          opacity: 0.72
-        },
-        outlined: {
-          position: 'relative',
-          transform: 'translate(4px, 2px) scale(0.75)',
-          transformOrigin: 'left top'
-        }
-      }
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          opacity: 0.72,
-          transform: 'scale(0.75)',
-          transformOrigin: 'left bottom'
-        }
-      }
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: defaultTheme.shape.borderRadius * 2
-        },
-        notchedOutline: {
-          top: 0,
-          legend: {
-            display: 'none'
-          }
-        }
-      }
-    },
-    MuiFilledInput: {
-      defaultProps: {
-        disableUnderline: true
       },
-      styleOverrides: {
-        root: {
-          borderRadius: defaultTheme.shape.borderRadius
+      MuiPopover: {
+        defaultProps: {
+          elevation: 2
         }
-      }
-    },
-    MuiTextField: {
-      defaultProps: {
-        variant: 'outlined',
-        size: 'small',
-        margin: 'dense',
-        InputLabelProps: { shrink: true }
-      }
-    },
-    MuiPopper: {
-      defaultProps: {
-        style: {
-          zIndex: defaultTheme.zIndex.tooltip
+      },
+      MuiDialog: {
+        defaultProps: {
+          keepMounted: false,
+          fullWidth: true,
+          maxWidth: 'sm',
+          PaperProps: {
+            elevation: 2
+          }
+        },
+        styleOverrides: {
+          root: {
+            backdropFilter: 'blur(2px)'
+          }
+        }
+      },
+      MuiDialogTitle: {
+        styleOverrides: {
+          root: {
+            fontSize: '1.5rem',
+            fontWeight: 600
+          }
+        }
+      },
+      MuiLink: {
+        defaultProps: {
+          underline: 'hover',
+          fontWeight: 500,
+          href: '#'
+        }
+      },
+      MuiListItemIcon: {
+        styleOverrides: {
+          root: {
+            minWidth: defaultTheme.spacing(4)
+          }
+        }
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            fontWeight: 600
+          }
+        }
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            backgroundImage: 'none'
+          }
+        }
+      },
+      MuiCardContent: {
+        styleOverrides: {
+          root: {
+            '&, &:last-child': {
+              padding: defaultTheme.spacing(3)
+            }
+          }
+        }
+      },
+      MuiDialogActions: {
+        styleOverrides: {
+          root: {
+            borderTop: `1px solid ${defaultTheme.palette.divider}`,
+            justifyContent: 'flex-start',
+            padding: defaultTheme.spacing(2.5, 3)
+          }
+        }
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            opacity: 0.72
+          },
+          outlined: {
+            position: 'relative',
+            transform: 'translate(4px, 2px) scale(0.75)',
+            transformOrigin: 'left top'
+          }
+        }
+      },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            opacity: 0.72,
+            transform: 'scale(0.75)',
+            transformOrigin: 'left bottom'
+          }
+        }
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: defaultTheme.shape.borderRadius * 2
+          },
+          notchedOutline: {
+            top: 0,
+            legend: {
+              display: 'none'
+            }
+          }
+        }
+      },
+      MuiFilledInput: {
+        defaultProps: {
+          disableUnderline: true
+        },
+        styleOverrides: {
+          root: {
+            borderRadius: defaultTheme.shape.borderRadius
+          }
+        }
+      },
+      MuiTextField: {
+        defaultProps: {
+          variant: 'outlined',
+          size: 'small',
+          margin: 'dense',
+          InputLabelProps: { shrink: true }
+        }
+      },
+      MuiPopper: {
+        defaultProps: {
+          style: {
+            zIndex: defaultTheme.zIndex.tooltip
+          }
         }
       }
     }
-  }
-})
+  })
 
-export default theme
+export const darkTheme = themeBuilder(darkPalette)
+export const lightTheme = themeBuilder(lightPalette)
+
+export default darkTheme
