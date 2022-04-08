@@ -13,21 +13,21 @@ import FormInput from '../../components/forms/FormInput'
 import AuthLayout from '../../components/layouts/AuthLayout'
 import { ForgotPasswordInput, useForgotPasswordMutation } from '../../graphql/generated'
 
-const schema = yup
+const ForgotPasswordValidationSchema = yup
   .object({
     email: yup.string().email('Should be a valid email address').required('Required')
   })
   .required()
 
-const defaultValues: ForgotPasswordInput = {
+export const ForgotPasswordDefaultValues: ForgotPasswordInput = {
   email: ''
 }
 
 const ForgotPassword: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
   const methods = useForm<ForgotPasswordInput>({
-    defaultValues,
-    resolver: yupResolver(schema)
+    defaultValues: ForgotPasswordDefaultValues,
+    resolver: yupResolver(ForgotPasswordValidationSchema)
   })
   const { mutateAsync, isLoading } = useForgotPasswordMutation()
   const navigate = useNavigate()

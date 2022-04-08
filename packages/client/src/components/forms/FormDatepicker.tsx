@@ -1,6 +1,7 @@
 import { DatePicker, DatePickerProps } from '@mui/lab'
 import { TextField, TextFieldProps } from '@mui/material'
 import { Moment } from 'moment'
+import { useState } from 'react'
 import { Controller, UseControllerProps, useFormContext } from 'react-hook-form'
 import { FieldPath, FieldValues } from 'react-hook-form/dist/types'
 import { DEFAULT_DATE_FORMAT } from '../../routes/Invoices/utils/dateFormats'
@@ -28,6 +29,11 @@ function FormDatepicker<
   ...props
 }: FormDatepickerProps<TFieldValues, TName>) {
   const { control } = useFormContext<TFieldValues>()
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <Controller<TFieldValues, TName>
       name={name}
@@ -41,6 +47,9 @@ function FormDatepicker<
             views={['day']}
             inputFormat={DEFAULT_DATE_FORMAT}
             {...props}
+            open={open}
+            onOpen={handleOpen}
+            onClose={handleClose}
             value={value}
             onChange={(date) => onChange(date ? (date as Moment).toISOString() : '')}
             renderInput={(params) => (
@@ -53,12 +62,18 @@ function FormDatepicker<
                 {...params}
                 inputProps={{
                   ...params.inputProps,
-                  placeholder: ''
+                  placeholder: '',
+                  readOnly: true
+                }}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: null
                 }}
                 name={name}
                 onBlur={onBlur}
                 error={invalid}
                 helperText={error ? error.message : null}
+                onClick={handleOpen}
               />
             )}
           />

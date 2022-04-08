@@ -14,15 +14,18 @@ export const UserCompanyValidationSchema = yup
         name: yup.string().required('Required'),
         contactName: yup.string().required('Required'),
         contactEmail: yup.string().email('Enter a valid email').required('Required'),
-        taxRate: yup.number().nullable().required('Required'),
+        taxRate: yup.number().nullable().min(0, 'Should be greater than or equal to 0').required('Required'),
         taxNumber: yup.string().required('Required'),
         taxName: yup.string(),
         streetAddress: yup.string(),
         city: yup.string(),
         state: yup.string(),
         country: yup.string().required('Required'),
-        postalCode: yup.string().required('Required'),
-        website: yup.string()
+        postalCode: yup
+          .string()
+          .matches(/^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]$/, 'Enter a valid postal code')
+          .required('Required'),
+        website: yup.string().url('Should be a valid url')
       })
       .required()
   })

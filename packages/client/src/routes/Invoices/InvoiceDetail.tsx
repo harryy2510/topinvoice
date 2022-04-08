@@ -31,6 +31,7 @@ import {
 import { differenceBy, intersectionWith, isEqual, omit, pick } from 'lodash-es'
 import { bindTrigger } from 'material-ui-popup-state'
 import { bindPopper, usePopupState } from 'material-ui-popup-state/hooks'
+import moment from 'moment'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
@@ -71,9 +72,35 @@ const formId = 'invoice-details-form'
 
 export const InvoiceDetailValidationSchema = yup
   .object({
-    invoiceDate: yup.string().required('Required'),
-    dueDate: yup.string().nullable(),
-    paidDate: yup.string().nullable(),
+    invoiceDate: yup.date().typeError('Required').required('Required'),
+    dueDate: yup
+      .date()
+      .transform((value) => (value && moment(value).isValid() ? value : null))
+      .nullable()
+      .test('due-date', 'Cannot be before invoice date', (value, context) => {
+        if (
+          value &&
+          context.parent.invoiceDate &&
+          moment(value).startOf('d').isBefore(moment(context.parent.invoiceDate).startOf('d'))
+        ) {
+          return Promise.resolve(false)
+        }
+        return Promise.resolve(true)
+      }),
+    paidDate: yup
+      .date()
+      .transform((value) => (value && moment(value).isValid() ? value : null))
+      .nullable()
+      .test('paid-date', 'Cannot be before invoice date', (value, context) => {
+        if (
+          value &&
+          context.parent.invoiceDate &&
+          moment(value).startOf('d').isBefore(moment(context.parent.invoiceDate).startOf('d'))
+        ) {
+          return Promise.resolve(false)
+        }
+        return Promise.resolve(true)
+      }),
     status: yup
       .string()
       .oneOf([InvoiceStatusEnum.Draft, InvoiceStatusEnum.Sent, InvoiceStatusEnum.Paid], 'Choose a valid option')
@@ -82,9 +109,19 @@ export const InvoiceDetailValidationSchema = yup
       yup.object({
         name: yup.string().required('Required'),
         description: yup.string().nullable(),
-        discount: yup.number().nullable().typeError('Required'),
-        price: yup.number().nullable().typeError('Required').required('Required'),
-        quantity: yup.number().nullable().typeError('Required').required('Required'),
+        discount: yup.number().nullable().min(0, 'Should be greater than or equal to 0'),
+        price: yup
+          .number()
+          .nullable()
+          .typeError('Required')
+          .min(0, 'Should be greater than or equal to 0')
+          .required('Required'),
+        quantity: yup
+          .number()
+          .nullable()
+          .typeError('Required')
+          .min(0, 'Should be greater than or equal to 0')
+          .required('Required'),
         unit: yup.string().nullable()
       })
     )
@@ -225,6 +262,8 @@ const InvoiceDetail: FC = () => {
   const country = useMemo(() => getCountry(viewer?.company?.country), [getCountry, viewer?.company?.country])
 
   const items = methods.watch('items')
+  const invoiceDate = methods.watch('invoiceDate')
+  const minDate = invoiceDate ? moment(invoiceDate) : undefined
 
   const subtotal = items?.reduce((subtotal, curr) => subtotal + (curr.price || 0) * (curr.quantity || 1), 0) ?? 0
   const discount = items?.reduce((discount, curr) => discount + (curr.discount || 0), 0) ?? 0
@@ -320,10 +359,10 @@ const InvoiceDetail: FC = () => {
                 <FormDatepicker margin="none" label="Invoice Date" name="invoiceDate" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormDatepicker clearable margin="none" label="Due Date" name="dueDate" />
+                <FormDatepicker minDate={minDate} clearable margin="none" label="Due Date" name="dueDate" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormDatepicker clearable margin="none" label="Paid Date" name="paidDate" />
+                <FormDatepicker minDate={minDate} clearable margin="none" label="Paid Date" name="paidDate" />
               </Grid>
             </Grid>
           </Grid>

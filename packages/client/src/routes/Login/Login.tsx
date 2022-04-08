@@ -16,7 +16,7 @@ import { LoginInput, useLoginMutation } from '../../graphql/generated'
 import accessTokenState from '../../recoil/atoms/accessTokenState'
 import redirectState from '../../recoil/atoms/redirectState'
 
-const schema = yup
+const LoginValidationSchema = yup
   .object({
     email: yup.string().email('Should be a valid email address').required('Required'),
     password: yup
@@ -29,7 +29,7 @@ const schema = yup
   })
   .required()
 
-const defaultValues: LoginInput = {
+export const LoginDefaultValues: LoginInput = {
   email: '',
   password: ''
 }
@@ -37,8 +37,8 @@ const defaultValues: LoginInput = {
 const Login: FC = () => {
   const setAccessToken = useSetRecoilState(accessTokenState)
   const methods = useForm<LoginInput>({
-    defaultValues,
-    resolver: yupResolver(schema)
+    defaultValues: LoginDefaultValues,
+    resolver: yupResolver(LoginValidationSchema)
   })
   const { mutateAsync, isLoading } = useLoginMutation()
   const navigate = useNavigate()

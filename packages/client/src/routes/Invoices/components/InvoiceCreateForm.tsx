@@ -10,7 +10,7 @@ import useClientsSearchAutocomplete from '../../Clients/hooks/useClientsSearchAu
 
 export const CreateInvoiceValidationSchema = yup
   .object({
-    invoiceDate: yup.string().required('Required'),
+    invoiceDate: yup.date().typeError('Required').required('Required'),
     company: yup.object({
       id: yup.string().required('Required')
     })

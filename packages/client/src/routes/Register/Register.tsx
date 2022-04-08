@@ -14,7 +14,7 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import { CreateUser, useRegisterMutation } from '../../graphql/generated'
 import accessTokenState from '../../recoil/atoms/accessTokenState'
 
-const schema = yup
+export const RegisterValidationSchema = yup
   .object({
     firstName: yup.string().required('Required'),
     lastName: yup.string(),
@@ -29,7 +29,7 @@ const schema = yup
   })
   .required()
 
-const defaultValues: CreateUser = {
+export const RegisterDefaultValues: CreateUser = {
   firstName: '',
   lastName: '',
   email: '',
@@ -39,8 +39,8 @@ const defaultValues: CreateUser = {
 const Register: FC = () => {
   const setAccessToken = useSetRecoilState(accessTokenState)
   const methods = useForm<CreateUser>({
-    defaultValues,
-    resolver: yupResolver(schema)
+    defaultValues: RegisterDefaultValues,
+    resolver: yupResolver(RegisterValidationSchema)
   })
   const { mutateAsync, isLoading } = useRegisterMutation()
   const navigate = useNavigate()
