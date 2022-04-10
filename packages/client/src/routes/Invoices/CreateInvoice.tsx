@@ -13,19 +13,19 @@ import InvoiceCreateForm, {
 } from './components/InvoiceCreateForm'
 
 export type CreateInvoiceProps = DialogProps & {
-  companyId?: string
+  clientId?: string
 }
 
 const formId = 'create-invoice-form'
 
-const CreateInvoice: FC<CreateInvoiceProps> = ({ onClose, companyId }) => {
+const CreateInvoice: FC<CreateInvoiceProps> = ({ onClose, clientId }) => {
   const { mutateAsync, isLoading } = useCreateInvoiceMutation()
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const methods = useForm<ICreateInvoice>({
     defaultValues: {
       ...CreateInvoiceDefaultValues,
-      ...(companyId ? { company: { id: companyId } } : {})
+      ...(clientId ? { company: { id: clientId } } : {})
     },
     resolver: yupResolver(CreateInvoiceValidationSchema)
   })

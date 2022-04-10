@@ -450,15 +450,13 @@ const InvoiceDetail: FC = () => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
-                      <FormAutocomplete
+                      <FormInput
                         data-cy={`input-item-unit-${index}`}
                         variant="filled"
                         InputProps={{ disableUnderline: true }}
                         margin="none"
                         label="Unit"
                         name={`items.${index}.unit`}
-                        options={['hrs', 'days', 'weeks', 'months']}
-                        freeSolo
                       />
                     </Grid>
                   </Grid>

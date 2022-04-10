@@ -62,10 +62,6 @@ function FormAutocomplete<
   shouldUnregister,
   defaultValue,
   control: _control,
-  label,
-  variant,
-  InputProps,
-  margin,
   ...props
 }: FormAutocompleteProps<TFieldValues, TName>) {
   const { control } = useFormContext<TFieldValues>()

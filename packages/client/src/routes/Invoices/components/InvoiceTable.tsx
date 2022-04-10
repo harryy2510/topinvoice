@@ -11,6 +11,7 @@ import formatInvoiceNumber from '../utils/formatInvoiceNumber'
 
 export type InvoiceTableProps = Partial<DataGridProps> & {
   data?: InvoicesQuery
+  clientId?: string
 }
 
 type Invoice = NonNullable<NonNullable<InvoicesQuery['viewer']>['invoices']>['nodes'][0]

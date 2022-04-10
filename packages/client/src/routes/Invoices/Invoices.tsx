@@ -37,8 +37,8 @@ const Invoices: FC<InvoicesProps> = ({ clientId }) => {
   )
 
   return (
-    <MainLayout title="Invoices" actions={actions} onAddClick={() => setAddOpen(true)}>
-      <CreateInvoice companyId={clientId || selectedClientId} open={addOpen} onClose={() => setAddOpen(false)} />
+    <MainLayout title="Invoices" actions={clientId ? null : actions} onAddClick={() => setAddOpen(true)}>
+      <CreateInvoice clientId={clientId || selectedClientId} open={addOpen} onClose={() => setAddOpen(false)} />
       <InvoiceTable {...tableProps} loading={isFetching} data={data} />
     </MainLayout>
   )
