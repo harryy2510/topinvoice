@@ -1,5 +1,6 @@
 const path = require('path')
 const CracoEsbuildPlugin = require('craco-esbuild')
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 
 require('dotenv').config({ path: path.resolve('..', '..', '.env') })
 
@@ -11,7 +12,8 @@ module.exports = {
     plugins: [
       new webpack.ProvidePlugin({
         React: 'react'
-      })
+      }),
+      new SimpleProgressPlugin()
     ]
   },
   eslint: {
