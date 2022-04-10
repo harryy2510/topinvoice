@@ -9,3 +9,4 @@ build
 .eslintcache
 npm-debug.*
 tsconfig.tsbuildinfo
+*.sh
