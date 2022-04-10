@@ -24,8 +24,16 @@ async function bootstrap() {
       origin: true
     })
   } else {
-    // @ts-ignore
-    app.use(helmet())
+    app.use(
+      // @ts-ignore
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'", '*.geojs.*']
+          }
+        }
+      })
+    )
   }
   await app.listen(appConfig.port, appConfig.host)
 }
