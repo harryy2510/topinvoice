@@ -29,7 +29,7 @@ async function bootstrap() {
       helmet({
         contentSecurityPolicy: {
           directives: {
-            defaultSrc: ["'self'", '*.geojs.*']
+            defaultSrc: ["'self'", '*.geojs.io']
           }
         }
       })
