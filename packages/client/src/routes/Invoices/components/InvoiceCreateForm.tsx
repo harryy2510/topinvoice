@@ -34,11 +34,12 @@ const InvoiceCreateForm: FC<FormProps<CreateInvoice>> = ({ methods, ...props }) 
     <Form<CreateInvoice> methods={methods} {...props}>
       <FormAutocomplete
         {...autocompleteProps}
+        data-cy="input-company.id"
         label="Client"
         placeholder="Type to search for clients"
         name="company.id"
       />
-      <FormDatepicker label="Invoice Date" name="invoiceDate" />
+      <FormDatepicker data-cy="input-invoiceDate" label="Invoice Date" name="invoiceDate" />
     </Form>
   )
 }

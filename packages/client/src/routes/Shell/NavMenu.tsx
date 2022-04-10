@@ -2,6 +2,7 @@ import { DashboardOutlined, PeopleOutlined, ReceiptOutlined } from '@mui/icons-m
 import { Button as MuiButton, ButtonProps, Divider, styled, SvgIconProps, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import clsx from 'clsx'
+import { toLower } from 'lodash-es'
 import { ComponentType, FC, useCallback } from 'react'
 import { Link as BaseLink } from 'react-router-dom'
 import Flex from '../../components/Flex'
@@ -58,6 +59,7 @@ const RenderNavItem: FC<MenuItem & { active?: boolean }> = ({ active, icon, titl
     <>
       <Box px={1.5} py={0.5}>
         <Button
+          data-cy={`menu-item-${toLower(title)}`}
           fullWidth
           variant="text"
           {...buttonProps}

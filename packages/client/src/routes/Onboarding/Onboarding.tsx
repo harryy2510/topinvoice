@@ -60,7 +60,15 @@ const Onboarding: FC = () => {
             </Typography>
             <UserCompanyForm hideContactDetails id={formId} methods={methods} onSuccess={handleSubmit} />
             <Center mt={4}>
-              <LoadingButton form={formId} fullWidth size="large" loading={isLoading} variant="contained" type="submit">
+              <LoadingButton
+                data-cy="button-submit"
+                form={formId}
+                fullWidth
+                size="large"
+                loading={isLoading}
+                variant="contained"
+                type="submit"
+              >
                 Update
               </LoadingButton>
             </Center>

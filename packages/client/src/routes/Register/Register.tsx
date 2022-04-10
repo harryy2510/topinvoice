@@ -21,11 +21,11 @@ export const RegisterValidationSchema = yup
     email: yup.string().email('Should be a valid email address').required('Required'),
     password: yup
       .string()
+      .required('Required')
       .matches(
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
         'Choose a password with at least 8 characters. Choose a mixture of upper and lower case letters, numbers, and symbols.'
       )
-      .required('Required')
   })
   .required()
 
@@ -54,21 +54,28 @@ const Register: FC = () => {
       <Form<CreateUser> methods={methods} onSuccess={handleSubmit}>
         <Grid container columnSpacing={2}>
           <Grid item xs={12} sm={6}>
-            <FormInput name="firstName" label="First Name" />
+            <FormInput data-cy="input-firstName" name="firstName" label="First Name" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormInput name="lastName" label="Last Name" />
+            <FormInput data-cy="input-lastName" name="lastName" label="Last Name" />
           </Grid>
         </Grid>
-        <FormInput name="email" label="Email" type="email" />
-        <FormInput name="password" label="Password" type="password" />
+        <FormInput data-cy="input-email" name="email" label="Email" type="email" />
+        <FormInput data-cy="input-password" name="password" label="Password" type="password" />
         <Center mt={4}>
-          <LoadingButton fullWidth size="large" loading={isLoading} variant="contained" type="submit">
+          <LoadingButton
+            data-cy="button-submit"
+            fullWidth
+            size="large"
+            loading={isLoading}
+            variant="contained"
+            type="submit"
+          >
             Sign Up
           </LoadingButton>
         </Center>
         <Center mt={2}>
-          <Link color="inherit" variant="body2" component={RouterLink} to="/login">
+          <Link data-cy="link-login" color="inherit" variant="body2" component={RouterLink} to="/login">
             Already have an account?
           </Link>
         </Center>

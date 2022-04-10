@@ -34,10 +34,10 @@ const CreateClient: FC<CreateClientProps> = ({ onClose }) => {
         <UserCompanyForm id={formId} methods={methods} onSuccess={handleSubmit} />
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'flex-end' }}>
-        <Button onClick={handleClose} variant="text">
+        <Button data-cy="button-cancel" onClick={handleClose} variant="text">
           Cancel
         </Button>
-        <LoadingButton loading={isLoading} variant="contained" form={formId} type="submit">
+        <LoadingButton data-cy="button-submit" loading={isLoading} variant="contained" form={formId} type="submit">
           Submit
         </LoadingButton>
       </DialogActions>

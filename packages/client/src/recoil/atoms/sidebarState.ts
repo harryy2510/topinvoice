@@ -1,10 +1,10 @@
 import { atom } from 'recoil'
 import getPrefixedKey from '../../utils/getPrefixedKey'
 
-const key = getPrefixedKey('SIDEBAR')
+export const SidebarStateKey = getPrefixedKey('SIDEBAR')
 
 const sidebarState = atom<boolean>({
-  key,
+  key: SidebarStateKey,
   default: false
 })
 

@@ -12,7 +12,6 @@ import {
   Button,
   ButtonGroup,
   ClickAwayListener,
-  Divider,
   Grid,
   Grow,
   InputAdornment,
@@ -288,7 +287,14 @@ const InvoiceDetail: FC = () => {
         >
           Options
         </LoadingButton>
-        <LoadingButton loading={isLoading} variant="contained" form={formId} type="submit" size="small">
+        <LoadingButton
+          data-cy="button-submit"
+          loading={isLoading}
+          variant="contained"
+          form={formId}
+          type="submit"
+          size="small"
+        >
           Save
         </LoadingButton>
       </ButtonGroup>
@@ -385,6 +391,7 @@ const InvoiceDetail: FC = () => {
                   <Grid xs={12} sm={8} md={10} item container spacing={1}>
                     <Grid item xs={12} sm={6} md={6}>
                       <FormInput
+                        data-cy={`input-item-name-${index}`}
                         variant="filled"
                         InputProps={{ disableUnderline: true }}
                         margin="none"
@@ -394,6 +401,7 @@ const InvoiceDetail: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                       <FormInput
+                        data-cy={`input-item-quantity-${index}`}
                         variant="filled"
                         InputProps={{ disableUnderline: true }}
                         margin="none"
@@ -404,6 +412,7 @@ const InvoiceDetail: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                       <FormInput
+                        data-cy={`input-item-price-${index}`}
                         variant="filled"
                         InputProps={{
                           disableUnderline: true,
@@ -417,6 +426,7 @@ const InvoiceDetail: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                       <FormInput
+                        data-cy={`input-item-discount-${index}`}
                         variant="filled"
                         InputProps={{
                           disableUnderline: true,
@@ -430,6 +440,7 @@ const InvoiceDetail: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
                       <FormInput
+                        data-cy={`input-item-description-${index}`}
                         variant="filled"
                         InputProps={{ disableUnderline: true }}
                         multiline
@@ -440,6 +451,7 @@ const InvoiceDetail: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                       <FormAutocomplete
+                        data-cy={`input-item-unit-${index}`}
                         variant="filled"
                         InputProps={{ disableUnderline: true }}
                         margin="none"
@@ -490,7 +502,12 @@ const InvoiceDetail: FC = () => {
               </Box>
             )
           })}
-          <Button onClick={() => append(emptyInvoiceItem)} size="small" startIcon={<AddOutlined />}>
+          <Button
+            data-cy="button-add-item"
+            onClick={() => append(emptyInvoiceItem)}
+            size="small"
+            startIcon={<AddOutlined />}
+          >
             Add new item
           </Button>
         </Box>

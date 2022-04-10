@@ -79,15 +79,20 @@ const UserCompanyForm: FC<UserCompanyFormProps> = ({ gridProps, methods, hideCon
             Company Information
           </Typography>
           <Paper variant="outlined" sx={{ p: 2, pt: 1 }}>
-            <FormInput name="company.name" label="Company Name" />
-            <FormInput name="company.website" label="Website" />
+            <FormInput data-cy="input-name" name="company.name" label="Company Name" />
+            <FormInput data-cy="input-website" name="company.website" label="Website" />
             {!hideContactDetails && (
               <Grid container columnSpacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <FormInput name="company.contactName" label="Contact Name" />
+                  <FormInput data-cy="input-contactName" name="company.contactName" label="Contact Name" />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <FormInput name="company.contactEmail" label="Contact Email" type="email" />
+                  <FormInput
+                    data-cy="input-contactEmail"
+                    name="company.contactEmail"
+                    label="Contact Email"
+                    type="email"
+                  />
                 </Grid>
               </Grid>
             )}
@@ -100,13 +105,18 @@ const UserCompanyForm: FC<UserCompanyFormProps> = ({ gridProps, methods, hideCon
           <Paper variant="outlined" sx={{ p: 2, pt: 1 }}>
             <Grid container columnSpacing={2}>
               <Grid item xs={12} sm={6}>
-                <FormInput name="company.taxName" label="Tax Name" placeholder="VAT (Default)" />
+                <FormInput
+                  data-cy="input-taxName"
+                  name="company.taxName"
+                  label="Tax Name"
+                  placeholder="VAT (Default)"
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormInput name="company.taxRate" label="Tax Rate (%)" type="number" />
+                <FormInput data-cy="input-taxRate" name="company.taxRate" label="Tax Rate (%)" type="number" />
               </Grid>
             </Grid>
-            <FormInput name="company.taxNumber" label="Tax Number" />
+            <FormInput data-cy="input-taxNumber" name="company.taxNumber" label="Tax Number" />
           </Paper>
         </Grid>
         <Grid item xs={12} {...gridProps}>
@@ -114,11 +124,12 @@ const UserCompanyForm: FC<UserCompanyFormProps> = ({ gridProps, methods, hideCon
             Address
           </Typography>
           <Paper variant="outlined" sx={{ p: 2, pt: 1 }}>
-            <FormInput name="company.streetAddress" label="Street Address" />
+            <FormInput data-cy="input-streetAddress" name="company.streetAddress" label="Street Address" />
             <Grid container columnSpacing={2}>
               <Grid item xs={12} sm={states.length > 0 ? 6 : 12}>
                 <FormAutocomplete
                   disableClearable
+                  data-cy="input-country"
                   name="company.country"
                   label="Country"
                   getOptionLabel={(option: string) => {
@@ -136,6 +147,7 @@ const UserCompanyForm: FC<UserCompanyFormProps> = ({ gridProps, methods, hideCon
                 <Grid item xs={12} sm={6}>
                   <FormAutocomplete
                     disableClearable
+                    data-cy="input-state"
                     name="company.state"
                     label="State"
                     getOptionLabel={(option: string) => statesMap[option]?.name ?? ''}
@@ -144,10 +156,10 @@ const UserCompanyForm: FC<UserCompanyFormProps> = ({ gridProps, methods, hideCon
                 </Grid>
               )}
               <Grid item xs={12} sm={6}>
-                <FormInput name="company.city" label="City" />
+                <FormInput data-cy="input-city" name="company.city" label="City" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormInput name="company.postalCode" label="Postal Code" />
+                <FormInput data-cy="input-postalCode" name="company.postalCode" label="Postal Code" />
               </Grid>
             </Grid>
           </Paper>

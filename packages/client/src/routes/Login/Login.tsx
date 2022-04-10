@@ -57,20 +57,27 @@ const Login: FC = () => {
   return (
     <AuthLayout showSocialLogin title="Hi, Welcome Back">
       <Form<LoginInput> methods={methods} onSuccess={handleSubmit}>
-        <FormInput name="email" label="Email" type="email" />
-        <FormInput name="password" label="Password" type="password" />
+        <FormInput data-cy="input-email" name="email" label="Email" type="email" />
+        <FormInput data-cy="input-password" name="password" label="Password" type="password" />
         <Flex mt={1} justifyContent="flex-end">
-          <Link variant="body2" component={RouterLink} to="/forgot">
+          <Link data-cy="link-forgot" variant="body2" component={RouterLink} to="/forgot">
             Forgot Password?
           </Link>
         </Flex>
         <Center mt={4}>
-          <LoadingButton fullWidth size="large" loading={isLoading} variant="contained" type="submit">
+          <LoadingButton
+            data-cy="button-submit"
+            fullWidth
+            size="large"
+            loading={isLoading}
+            variant="contained"
+            type="submit"
+          >
             Sign In
           </LoadingButton>
         </Center>
         <Center mt={2}>
-          <Link color="inherit" variant="body2" component={RouterLink} to="/register">
+          <Link data-cy="link-register" color="inherit" variant="body2" component={RouterLink} to="/register">
             Don't have an account?
           </Link>
         </Center>

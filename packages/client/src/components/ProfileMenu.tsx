@@ -28,14 +28,14 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ children, setupMode, ...popupState 
   return (
     <Menu {...bindMenu(popupState)}>
       {!setupMode && [
-        <MenuItem key="profile" onClick={() => handleNavLink('/profile')} dense>
+        <MenuItem data-cy="menu-item-profile" key="profile" onClick={() => handleNavLink('/profile')} dense>
           <ListItemIcon>
             <PersonOutlined fontSize="small" />
           </ListItemIcon>
           <ListItemText>Profile</ListItemText>
         </MenuItem>
       ]}
-      <MenuItem onClick={handleLogout} dense>
+      <MenuItem data-cy="menu-item-logout" onClick={handleLogout} dense>
         <ListItemIcon>
           <LogoutOutlined fontSize="small" />
         </ListItemIcon>

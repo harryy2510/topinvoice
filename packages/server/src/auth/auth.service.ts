@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as moment from 'moment'
 import { UserEntity } from 'src/users/entities/user.entity'
@@ -17,8 +17,12 @@ export class AuthService {
   }
 
   async register(userInput: CreateUserDTO) {
-    const user = await this.usersService.createOne(userInput)
-    return this.createToken(user)
+    try {
+      const user = await this.usersService.createOne(userInput)
+      return this.createToken(user)
+    } catch (e) {
+      throw new HttpException('Email already exists', 400)
+    }
   }
 
   async socialLogin(socialUser: Partial<UserEntity>) {

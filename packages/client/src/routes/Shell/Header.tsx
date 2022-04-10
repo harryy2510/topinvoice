@@ -38,7 +38,7 @@ const Header: FC<HeaderProps> = ({ setupMode }) => {
         {viewer && (
           <>
             <Box flex={1} />
-            <IconButton size="small" {...bindTrigger(popupState)}>
+            <IconButton data-cy="button-profile" size="small" {...bindTrigger(popupState)}>
               <Avatar sx={{ width: 36, height: 36, backgroundColor: 'primary.light' }} src={viewer.profileImage ?? ''}>
                 {viewer.firstName?.slice(0, 1)}
               </Avatar>

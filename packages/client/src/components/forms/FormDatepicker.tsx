@@ -54,6 +54,7 @@ function FormDatepicker<
             onChange={(date) => onChange(date ? (date as Moment).toISOString() : '')}
             renderInput={(params) => (
               <TextField
+                data-cy={(props as any)['data-cy']}
                 fullWidth
                 margin={margin}
                 sx={sx}

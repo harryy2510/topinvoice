@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.4.3",
+    "@faker-js/faker": "^6.1.1",
     "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/introspection": "^2.1.1",
     "@graphql-codegen/typescript": "^2.4.8",
@@ -75,6 +76,7 @@
     "@types/yup": "^0.29.13",
     "babel-plugin-direct-import": "^1.0.0",
     "cypress": "^9.5.3",
+    "cypress-localstorage-commands": "^1.7.0",
     "react-scripts": "5.0.0"
   }
 }
