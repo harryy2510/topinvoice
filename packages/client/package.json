@@ -75,8 +75,10 @@
     "@types/react-dom": "^17.0.14",
     "@types/yup": "^0.29.13",
     "babel-plugin-direct-import": "^1.0.0",
+    "craco-esbuild": "^0.5.0",
     "cypress": "^9.5.3",
     "cypress-localstorage-commands": "^1.7.0",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "webpack-simple-progress-plugin": "^0.0.5"
   }
 }

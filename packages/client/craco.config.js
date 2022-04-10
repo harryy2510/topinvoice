@@ -1,9 +1,12 @@
 const path = require('path')
+const CracoEsbuildPlugin = require('craco-esbuild')
+
 require('dotenv').config({ path: path.resolve('..', '..', '.env') })
 
 const webpack = require('webpack')
 
 module.exports = {
+  plugins: [{ plugin: CracoEsbuildPlugin }],
   webpack: {
     plugins: [
       new webpack.ProvidePlugin({
